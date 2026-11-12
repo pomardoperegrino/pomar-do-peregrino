@@ -38,8 +38,70 @@ document.getElementById('show-on-map').href='mapa-interativo.html#'+encodeURICom
 document.getElementById('copy-tree').addEventListener('click',async()=>{const url=location.href;try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado!'}catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}});
 const isOrange=/^laranja\b/i.test(f.nome);
 const orangeReference={file:"Citrus-sinensis-fruit.JPG",credit:"Sten Porse",license:"CC BY-SA 3.0",licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/",note:"Fotografia de referência da laranjeira (Citrus × sinensis). Não é fotografia da muda "+code+" e não comprova a variedade "+f.nome+"."};
-const isApple=/^maç[ãa]\b/i.test(f.nome);const appleReference={file:"Apples on tree 2021 G1.jpg",credit:"George Chernilevsky",license:"CC BY-SA 4.0",licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",note:"Fotografia botânica de referência de macieira (Malus domestica). Não é fotografia da muda "+code+" nem comprova a variedade "+f.nome+"."};const photo=photoReferences[code]||(isOrange?orangeReference:isApple?appleReference:null);if(photo){const panel=document.getElementById('photo-panel'),img=document.getElementById('photo-img'),caption=document.getElementById('photo-caption');const source='https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(photo.file).replace(/%20/g,'_');img.src=photo.file==='Citrus-sinensis-fruit.JPG'?'https://upload.wikimedia.org/wikipedia/commons/3/30/Citrus-sinensis-fruit.JPG':'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(photo.file).replace(/%20/g,'_');img.alt='Fotografia botânica de referência da planta; não é a muda cadastrada no pomar';img.onerror=()=>{panel.hidden=true;document.querySelector(".plant-art").hidden=false;document.getElementById('photo-status').textContent='Fotografia de referência indisponível no momento. Exibindo ilustração provisória.'};img.onload=()=>{document.querySelector(".plant-art").hidden=true};caption.append(document.createTextNode(photo.note+' Crédito: '+photo.credit+' • '));const license=document.createElement('a');license.href=photo.licenseUrl;license.textContent=photo.license;license.target='_blank';license.rel='noopener noreferrer';const original=document.createElement('a');original.href=source;original.textContent='Ver fotografia e autoria no Wikimedia Commons';original.target='_blank';original.rel='noopener noreferrer';caption.append(license,document.createTextNode(' • '),original);panel.hidden=false}
-const art=document.getElementById("plant-illustration");art.innerHTML=botanicalSketch(f.nome);art.setAttribute("aria-label","Desenho esquemático ilustrativo de "+f.nome);
+const isApple=/^maç[ãa]\b/i.test(f.nome);const appleReference={file:"Apples on tree 2021 G1.jpg",credit:"George Chernilevsky",license:"CC BY-SA 4.0",licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/",note:"Fotografia botânica de referência de macieira (Malus domestica). Não é fotografia da muda "+code+" nem comprova a variedade "+f.nome+"."};
+// Busca fotografias reais e licenciadas no Wikimedia Commons quando não há foto curada.
+// A busca é por nome de referência, não uma identificação da muda nem garantia da cultivar.
+const searchNames=[
+ [/^tangerina/i,"Citrus reticulata fruit tree"],
+ [/^pêssego/i,"Prunus persica peaches tree"],
+ [/^ameixa/i,"Prunus salicina plum fruit tree"],
+ [/^caqui/i,"Diospyros kaki fruit tree"],
+ [/^pera/i,"Pyrus communis pear fruit tree"],
+ [/^figo/i,"Ficus carica figs tree"],
+ [/^limão/i,"Citrus limon lemon fruit tree"],
+ [/^goiaba/i,"Psidium guajava fruit tree"],
+ [/^ingá/i,"Inga edulis fruit tree"],
+ [/^araçá/i,"Psidium cattleianum fruit"],
+ [/^mirtilo/i,"Vaccinium blueberry fruit bush"],
+ [/^framboesa/i,"Rubus idaeus raspberry fruit"],
+ [/^jabuticaba/i,"Plinia cauliflora jabuticaba fruit"],
+ [/^pitanga/i,"Eugenia uniflora pitanga fruit"],
+ [/^grumixama/i,"Eugenia brasiliensis fruit"],
+ [/^uvaia/i,"Eugenia pyriformis fruit"],
+ [/^graviola/i,"Annona muricata soursop fruit"],
+ [/^abacate/i,"Persea americana avocado fruit"],
+ [/^kiwi/i,"Actinidia deliciosa kiwi fruit"],
+ [/^lichia/i,"Litchi chinensis lychee fruit"],
+ [/^romã/i,"Punica granatum pomegranate fruit"],
+ [/^mamão/i,"Carica papaya fruit tree"],
+ [/^café$/i,"Coffea arabica coffee berries"],
+ [/^erva-mate/i,"Ilex paraguariensis plant"],
+ [/^nogueira/i,"Carya illinoinensis pecan tree"],
+ [/^fisális/i,"Physalis peruviana fruit"],
+ [/^amora/i,"Morus nigra mulberry fruit"]
+];
+async function findCommonsPhoto(name){
+ const query=(searchNames.find(([re])=>re.test(name))||[])[1]||name+" fruit plant";
+ const params=new URLSearchParams({action:"query",generator:"search",gsrsearch:query,gsrnamespace:"6",gsrlimit:"12",prop:"imageinfo",iiprop:"url|extmetadata",iiurlwidth:"850",format:"json",origin:"*"});
+ const response=await fetch("https://commons.wikimedia.org/w/api.php?"+params.toString());
+ if(!response.ok)throw new Error("Wikimedia indisponível");
+ const data=await response.json();
+ const pages=Object.values(data.query?.pages||{});
+ for(const page of pages){
+   const info=page.imageinfo?.[0];if(!info?.thumburl&&!info?.url)continue;
+   if(!/\.(jpe?g|png|webp)$/i.test(page.title||""))continue;
+   const meta=info.extmetadata||{};
+   const license=meta.LicenseShortName?.value||"";
+   if(!/(CC BY|CC0|Public domain|Domínio público)/i.test(license))continue;
+   const strip=t=>String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+   return {url:info.thumburl||info.url,source:info.descriptionurl,credit:strip(meta.Artist?.value)||"Ver autoria na fonte",license,licenseUrl:meta.LicenseUrl?.value||info.descriptionurl};
+ }
+ throw new Error("Nenhuma fotografia licenciada encontrada");
+}
+function loadCommonsReference(name){
+ const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
+ status.textContent="Procurando fotografia botânica real de referência…";
+ findCommonsPhoto(name).then(p=>{
+   img.alt="Fotografia real de referência encontrada para "+name+"; não é a muda do pomar";
+   img.onload=()=>{document.querySelector(".plant-art").hidden=true;status.textContent=""};
+   img.onerror=()=>{panel.hidden=true;status.textContent="Fotografia temporariamente indisponível. Consulte a fonte botânica posteriormente."};
+   img.src=p.url;
+   caption.textContent="Fotografia botânica de referência encontrada pela pesquisa ‘"+name+"’. A espécie ou cultivar exata ainda precisa de conferência; esta não é a muda do pomar. Crédito: "+p.credit+" • "+p.license+" • ";
+   const link=document.createElement("a");link.href=p.source;link.textContent="Ver fotografia, autoria e licença";link.target="_blank";link.rel="noopener noreferrer";caption.append(link);panel.hidden=false;
+ }).catch(()=>{status.textContent="Ainda não foi localizada uma fotografia de referência com licença verificada para este registro.";});
+}
+const photo=photoReferences[code]||(isOrange?orangeReference:isApple?appleReference:null);if(photo){const panel=document.getElementById('photo-panel'),img=document.getElementById('photo-img'),caption=document.getElementById('photo-caption');const source='https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(photo.file).replace(/%20/g,'_');img.src=photo.file==='Citrus-sinensis-fruit.JPG'?'https://upload.wikimedia.org/wikipedia/commons/3/30/Citrus-sinensis-fruit.JPG':'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(photo.file).replace(/%20/g,'_');img.alt='Fotografia botânica de referência da planta; não é a muda cadastrada no pomar';img.onerror=()=>{panel.hidden=true;document.querySelector(".plant-art").hidden=false;document.getElementById('photo-status').textContent='Fotografia de referência indisponível no momento. A fotografia será revisada.'};img.onload=()=>{document.querySelector(".plant-art").hidden=true};caption.append(document.createTextNode(photo.note+' Crédito: '+photo.credit+' • '));const license=document.createElement('a');license.href=photo.licenseUrl;license.textContent=photo.license;license.target='_blank';license.rel='noopener noreferrer';const original=document.createElement('a');original.href=source;original.textContent='Ver fotografia e autoria no Wikimedia Commons';original.target='_blank';original.rel='noopener noreferrer';caption.append(license,document.createTextNode(' • '),original);panel.hidden=false}else{loadCommonsReference(f.nome)}
+const art=document.getElementById("plant-illustration");art.innerHTML="";document.querySelector(".plant-art").hidden=true;
  document.getElementById("codigo").textContent="Código "+code;
  document.getElementById("nome").textContent=f.nome;
  document.getElementById("variedade").textContent=f.nome;
