@@ -23,6 +23,16 @@
       color: white;
       text-align: center;
       padding: 45px 20px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(rgba(20,65,38,.77),rgba(20,65,38,.83)), url("WhatsApp%20Image%202026-11-12%20at%2015.03.26.jpeg") center 52% / cover no-repeat;
     }
     header h1 { margin-bottom: 8px; }
     main {
