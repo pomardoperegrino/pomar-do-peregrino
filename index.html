@@ -105,11 +105,25 @@
     🍊 Conheça a Laranjeira
   </a>
 </section>
+    <section class="card" style="text-align:center">
+      <h2>📲 Compartilhe o Pomar do Peregrino</h2>
+      <p>Convide familiares, amigos e peregrinos a conhecer o pomar, suas árvores e suas histórias.</p>
+      <p><a href="https://api.whatsapp.com/send?text=Conhe%C3%A7a%20o%20Pomar%20do%20Peregrino%20%F0%9F%8C%B3%20https%3A%2F%2Fpomardoperegrino.github.io%2Fpomar-do-peregrino%2F" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#285b38;color:white;padding:12px 18px;border-radius:9px;text-decoration:none">Compartilhar pelo WhatsApp</a></p>
+      <p><button type="button" id="copy-site-link" style="padding:12px 18px;border:1px solid #285b38;border-radius:9px;background:white;color:#285b38;cursor:pointer;font:inherit">Copiar endereço do pomar</button></p>
+      <p id="copy-feedback" role="status" aria-live="polite"></p>
+      <p><small>O endereço também pode ser colocado na biografia do Instagram da Acolhida Beija-Flor.</small></p>
+    </section>
   </main>
 
   <footer>
     Pomar do Peregrino – Acolhida Beija-Flor
     <p>Um lugar para acolher, aprender e preservar.</p>
   </footer>
-</body>
+<script>
+document.getElementById('copy-site-link').addEventListener('click',async()=>{
+ const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';
+ try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado! Cole na bio do Instagram ou envie aos amigos.'}
+ catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}
+});
+</script></body>
 </html>
