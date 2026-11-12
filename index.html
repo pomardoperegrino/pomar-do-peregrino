@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Conheça o Pomar do Peregrino da Acolhida Beija-Flor, no Caminho do Louvor em Ituporanga/SC. Explore o mapa interativo e as fichas das plantas.">
+  <meta name="theme-color" content="#285b38">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Pomar do Peregrino | Acolhida Beija-Flor">
+  <meta property="og:description" content="Um espaço de acolhimento, natureza e educação ambiental no Caminho do Louvor. Explore o mapa e conheça cada árvore.">
+  <meta property="og:url" content="https://pomardoperegrino.github.io/pomar-do-peregrino/">
   <title>Pomar do Peregrino | Acolhida Beija-Flor</title>
   <style>
     body {
@@ -47,16 +53,31 @@
       color: white;
     }
 .hero-photo{margin:0 auto 22px;max-width:950px;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#164e32,#39794b);box-shadow:0 10px 30px #14392325;position:relative}.hero-photo img{display:block;width:100%;height:auto;max-height:650px;object-fit:contain}.hero-photo .photo-fallback{padding:40px 22px;text-align:center;color:white}.hero-photo .photo-fallback h2{color:white;font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 10px}.hero-photo .photo-fallback p{margin:6px auto;max-width:650px}.hero-photo figcaption{padding:10px 16px;text-align:center;background:#e5eee0;color:#31533a;font-size:.88rem}.hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}.hero-cta a{padding:12px 18px;border-radius:9px;text-decoration:none;font-weight:bold;background:white;color:#1c5133}.hero-cta a.secondary{background:#d8e8ce;color:#1c5133}a:focus-visible,button:focus-visible{outline:3px solid #efc469;outline-offset:3px}@media(max-width:600px){main{padding:18px 12px}.hero-photo{border-radius:12px}.hero-photo .photo-fallback{padding:30px 14px}}
+.site-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding:12px;background:#1d462e}.site-nav a{color:white;text-decoration:none;padding:9px 13px;border-radius:8px;font-weight:600}.site-nav a:hover,.site-nav a:focus-visible{background:#397b4c}.quick-search{background:linear-gradient(135deg,#e8f3e3,#fff);border:1px solid #d1e2cb}.quick-search form{display:flex;gap:9px;flex-wrap:wrap}.quick-search input{flex:1 1 190px;min-width:0;padding:13px;border:1px solid #a9c5a6;border-radius:9px;font:inherit}.quick-search button{background:#285b38;color:white;border:0;border-radius:9px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}.quick-search .hint{font-size:.9rem;color:#506d57;margin-bottom:0}.action-links{display:flex;gap:10px;flex-wrap:wrap}.action-links a{flex:1 1 180px;text-align:center}.skip-link{position:absolute;left:-9999px;top:0;background:white;color:#285b38;padding:10px;z-index:100}.skip-link:focus{left:10px}.mini-stats{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.mini-stats span{background:#eaf3e5;border-radius:12px;padding:9px 14px;font-size:.9rem}.mini-stats strong{color:#20563b}@media(max-width:600px){header{padding:26px 16px}.site-nav{gap:2px;padding:8px}.site-nav a{font-size:.88rem;padding:8px}.quick-search button{width:100%}}
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#conteudo">Ir ao conteúdo principal</a>
   <header>
     <h1>🌳 Pomar do Peregrino</h1>
     <p>Acolhida Beija-Flor | Caminho do Louvor</p>
     <p>Ituporanga – Santa Catarina</p>
   </header>
-
-  <main>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a href="#inicio">Início</a><a href="mapa-interativo.html">🗺️ Mapa</a><a href="catalogo.html">🌿 Catálogo</a><a href="#acolhida">Acolhida</a><a href="https://www.instagram.com/acolhidabeijaflor/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+  </nav>
+  <main id="conteudo">
+    <section class="card quick-search" id="inicio" aria-labelledby="encontre-arvore">
+      <h2 id="encontre-arvore">🔎 Encontre uma árvore pelo código</h2>
+      <p>Viu uma placa no pomar? Digite o código para abrir diretamente a ficha da planta.</p>
+      <form id="search-code-form">
+        <input id="tree-code-input" name="codigo" aria-label="Código da árvore" placeholder="Ex.: B07, C12, F09" autocomplete="off" maxlength="3" pattern="[A-Ia-i][0-9]{2}" required>
+        <button type="submit">Consultar árvore</button>
+      </form>
+      <p id="search-code-feedback" role="status" aria-live="polite"></p>
+      <p class="hint">Não sabe o código? <a href="mapa-interativo.html">Pesquise pelo nome da planta no mapa interativo.</a></p>
+      <div class="mini-stats"><span><strong>128</strong> posições no croqui</span><span><strong>Mapa interativo</strong> por código</span><span><strong>Fichas individuais</strong> de consulta</span></div>
+    </section>
     <figure class="hero-photo">
       <img src="acolhida-beija-flor-pomar.png" alt="Arte de divulgação da Acolhida Beija-Flor e do Projeto Pomar do Peregrino, com portal de madeira, diversidade de frutíferas e informações de acolhimento." loading="eager" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
       <div class="photo-fallback" hidden>
@@ -68,7 +89,7 @@
       <figcaption>Projeto Pomar do Peregrino • Natureza, educação ambiental e acolhimento</figcaption>
     </figure>
     <section class="card"><h2>🗺️ Mapa Interativo do Pomar</h2><p>Encontre qualquer uma das 128 posições do croqui pelo código, nome da planta ou doador. Toque na árvore para consultar suas informações.</p><p><a class="botao" href="mapa-interativo.html" style="display:inline-block;background:#285b38;color:white;text-decoration:none;padding:12px 18px;border-radius:9px">Explorar mapa interativo</a></p><p><small>Mapa esquemático por linhas; as posições exatas no terreno ainda serão representadas.</small></p></section>
-<section class="card">
+<section class="card" id="acolhida">
       <h2>Bem-vindo ao nosso pomar!</h2>
       <p>
         Aqui, cada árvore representa um gesto de amor
@@ -89,11 +110,7 @@
         será ampliado e revisado conforme a identificação
         e a situação de cada muda forem confirmadas.
       </p>
-      <p>
-        Em breve, cada planta terá sua identificação,
-        nome científico, características, curiosidades
-        e informações sobre floração e frutificação.
-      </p>
+      <p>As fichas individuais já permitem consultar os registros. Informações botânicas, fotografias verificadas e dados de floração e frutificação serão acrescentados gradualmente.</p>
     </section>
 
     <section class="card">
@@ -132,6 +149,12 @@
     <p>Um lugar para acolher, aprender e preservar.</p>
   </footer>
 <script>
+document.getElementById('search-code-form').addEventListener('submit',event=>{
+ event.preventDefault();
+ const code=document.getElementById('tree-code-input').value.trim().toUpperCase();
+ if(!/^[A-I][0-9]{2}$/.test(code)){document.getElementById('search-code-feedback').textContent='Digite um código no formato B07.';return}
+ location.href='ficha-individual.html?codigo='+encodeURIComponent(code);
+});
 document.getElementById('copy-site-link').addEventListener('click',async()=>{
  const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';
  try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado! Cole na bio do Instagram ou envie aos amigos.'}
