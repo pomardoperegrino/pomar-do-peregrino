@@ -220,7 +220,7 @@ document.getElementById('search-code-form').addEventListener('submit',event=>{
  event.preventDefault();
  const code=document.getElementById('tree-code-input').value.trim().toUpperCase();
  if(!/^[A-I][0-9]{2}$/.test(code)){document.getElementById('search-code-feedback').textContent='Digite um código no formato B07.';return}
- location.href='ficha-individual.html?codigo='+encodeURIComponent(code);
+ location.href='ficha-individual.html?v=20261112-plantio&codigo='+encodeURIComponent(code);
 });
 document.getElementById('copy-site-link').addEventListener('click',async()=>{
  const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';
