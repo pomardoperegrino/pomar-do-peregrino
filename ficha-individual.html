@@ -51,9 +51,9 @@ const searchNames=[
  [/^fortunella/i,["Citrus japonica","Fortunella margarita"]],
  [/^guabiju/i,["Myrcianthes pungens"]],
  [/^guaçatonga/i,["Casearia sylvestris"]],
- [/^baga de macaco/i,["Baga de macaco planta fruto"]],
- [/^ameixinha amarela/i,["Eriobotrya japonica","ameixinha amarela fruto"]],
- [/^cravo louro/i,["Syzygium aromaticum","Laurus nobilis"]],
+ [/^baga de macaco/i,["baga de macaco fruto"]],
+ [/^ameixinha amarela/i,["Eriobotrya japonica"]],
+ [/^cravo louro/i,["Syzygium aromaticum"]],
  [/^campari/i,["campari fruta árvore"]],
  [/^cipó-rabo-de-macaco/i,["cipó rabo de macaco planta"]],
  [/^tangerina/i,["Citrus reticulata"]],
@@ -115,6 +115,10 @@ async function findCommonsPhoto(name){
       const full=title+" "+description;
       // Não aceitar imagens genéricas que não indiquem a espécie consultada.
       if(!full.includes(genus))continue;
+      // Exigir também o epíteto específico quando há binômio botânico.
+      // Assim, imagens de outras espécies do mesmo gênero não são exibidas como se fossem a planta cadastrada.
+      const epithet=species.trim().split(/\s+/)[1]?.toLowerCase();
+      if(epithet && !full.includes(epithet))continue;
       if(!/(fruit|fruto|fruta|fruits|berry|berries|pêssego|ameixa|laranja|pitanga|citrus|figo|guava|guava|guabiroba)/i.test(full))continue;
       if(/\b(leaf|leaves|folha|folhas|bark|tronco|trunk|wood|seedling|muda|flower|flores|flor|herbarium|herbário)\b/i.test(title)&&!/(fruit|fruto|fruta|fruits)/i.test(title))continue;
       const score=(title.includes(species.toLowerCase())?12:0)+(title.includes(genus)?5:0)+(/fruit|fruto|fruta|fruits/.test(title)?8:0)-Number(page.index||0)/100;
@@ -132,8 +136,8 @@ async function findCommonsPhoto(name){
 }
 function loadCommonsReference(name){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
- if(/^falta identificar$/i.test(name)){
-  status.textContent="Espécie ainda não identificada no croqui. Aguardamos confirmação antes de publicar uma fotografia.";
+ if(/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro)$/i.test(name)){
+  status.textContent="Nome popular ou espécie ainda sem identificação botânica suficiente para escolher uma fotografia com segurança.";
   return;
  }
  status.textContent="Procurando fotografia real com licença de uso…";
