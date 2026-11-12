@@ -1,34 +1,47 @@
 # 🌳 Pomar do Peregrino
 
-**Catálogo Botânico Digital do Pomar do Peregrino**  
-Acolhida Beija-Flor • Caminho do Louvor • Ituporanga, Santa Catarina
+**Catálogo Botânico Digital — Acolhida Beija-Flor**  
+Caminho do Louvor • Ituporanga, Santa Catarina
 
-## Sobre o projeto
+## Sobre
 
-O Pomar do Peregrino é um espaço de acolhimento, educação ambiental e valorização da natureza. Este catálogo digital foi criado para ajudar peregrinos e visitantes a conhecer as espécies cultivadas e reconhecer o carinho de quem contribui para o pomar.
+Um espaço de acolhimento, memória dos doadores e educação ambiental. O índice do croqui de **5 de novembro de 2026** contém **128 registros de posições**. Esse número não comprova que todas as mudas estejam plantadas.
 
-## O que já está disponível
+## Navegação
 
-- **Página inicial:** [index.html](index.html), com a apresentação do projeto.
-- **Ficha da laranjeira:** [laranjeira.html](laranjeira.html), com identificação botânica, características, floração, frutificação e importância ambiental.
-- **Ilustração botânica:** [Laranjeira.png](Laranjeira.png), utilizada na ficha da laranjeira.
+- [Página inicial](index.html)
+- [Catálogo botânico](catalogo.html)
+- [Ficha educativa da laranjeira](laranjeira.html)
+- [Modelo de ficha individual](ficha-individual.html)
+- [Laranjeiras — 11 registros](laranjeiras-croqui.html)
+- [Tangerineiras — 8 registros](tangerineiras-croqui.html)
+- [Linha D — 12 registros](frutiferas-linha-d.html)
+- [Linha E — 18 registros](plantas-linha-e.html)
+- [Linha F — 15 registros](plantas-linha-f.html)
+- [Linha G — 12 registros](plantas-linha-g.html)
+- [Linha H — 10 registros](plantas-linha-h.html)
+- Registros complementares: [A — 7](complemento-linha-a.html), [B — 10](complemento-linha-b.html), [C — 12](complemento-linha-c.html), [D — 8](complemento-linha-d.html), [I — 5](complemento-linha-i.html).
 
-## Como consultar
+**Total: 128 registros organizados por posição.** A pesquisa da página `catalogo.html` ainda é experimental e não pesquisa todos os registros; utilize os links acima.
 
-Abra a página inicial e selecione **Conheça a Laranjeira**. A ficha contém também um link para retornar ao início.
+## Primeiras fichas individuais
 
-## Próximas etapas
+As posições **B07** e **B08** têm páginas individuais de demonstração:
 
-1. Conferir o inventário atualizado das plantas antes de divulgar quantidades.
-2. Padronizar as fichas com nome popular, nome científico, características, época de floração e frutificação e importância ambiental.
-3. Adicionar gradualmente as demais espécies, com imagens e informações verificadas.
-4. Identificar padrinhos e patrocinadores somente após confirmação dos nomes e das respectivas árvores.
-5. Preparar o catálogo para consulta por QR codes nas placas de identificação.
+- [B07](ficha-individual.html?codigo=B07)
+- [B08](ficha-individual.html?codigo=B08)
 
-## Cuidados com as informações
+Esses endereços são relativos e funcionarão no site publicado. Não imprimir QR Codes definitivos antes de verificar o endereço público e conferir os dados de campo.
 
-As épocas de floração e frutificação variam conforme a cultivar, o clima e o manejo. Informações sobre patrocinadores e quantidade de mudas devem ser conferidas antes da publicação.
+## Publicação do site
 
----
+Consulte o [guia para ativar o GitHub Pages](GUIA_PUBLICACAO.md). O site não deve ser considerado publicado apenas porque os arquivos estão no GitHub.
+
+## Antes de instalar placas
+
+1. Confirmar plantio e código de cada muda no terreno.
+2. Conferir identificação botânica e variedade.
+3. Validar grafia e autorização de divulgação dos nomes dos doadores.
+4. Testar os links públicos e QR Codes em celulares.
 
 *Um lugar para acolher, aprender e preservar.*
