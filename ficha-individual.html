@@ -57,7 +57,7 @@ const isApple=/^maç[ãa]\b/i.test(f.nome);const appleReference={file:"Apples on
 // A busca é por nome de referência, não uma identificação da muda nem garantia da cultivar.
 const searchNames=[
  [/^cortiça crespa/i,["Annona sylvatica","Annona neosalicifolia"]],
- [/^cortiça lisa/i,["Annona rugulosa"]],
+ [/^cortiça lisa/i,["Rollinia rugulosa","Annona rugulosa"]],
  [/^cabeludinha/i,["Myrciaria glazioviana","Plinia glomerata"]],
  [/^guabiroba/i,["Campomanesia xanthocarpa","Campomanesia"]],
  [/^cerejeira-do-rio-grande/i,["Eugenia involucrata"]],
@@ -183,6 +183,18 @@ const art=document.getElementById("plant-illustration");art.innerHTML="";documen
  document.getElementById("cientifico").textContent=isOrange?"Citrus × sinensis (L.) Osbeck (identificação geral; cultivar a confirmar)":"Em identificação / conferência";
  document.getElementById("doador").textContent=f.doador||"A confirmar";
  document.getElementById("posicao").textContent="Posição "+code+" no croqui";
+ if(code==="B05"){
+  document.getElementById("cientifico").textContent="Rollinia rugulosa Schltdl. (referência regional; identificação da muda a confirmar)";
+  document.getElementById("descricao").textContent="A cortiça-lisa é uma frutífera nativa da família Annonaceae, conhecida também como araticum-de-porco. Produz frutos carnosos com polpa clara, macia e comestível, envolvidos por casca amarelo-esverdeada. É uma espécie de interesse para a conservação da biodiversidade e a valorização dos frutos nativos do Alto Vale do Itajaí. Fonte: Apremavi e Instituto Federal Catarinense. A identidade botânica da muda do pomar ainda precisa ser confirmada.";
+  const ref=document.createElement("p");
+  ref.className="muted";
+  const source=document.createElement("a");
+  source.href="https://apremavi.org.br/cortica-lisa-a-fruta-da-criancada/";
+  source.target="_blank";source.rel="noopener noreferrer";
+  source.textContent="Conhecer a cortiça-lisa na Apremavi (texto e fotografias de referência)";
+  ref.append(source);
+  document.getElementById("descricao").after(ref);
+ }
  document.getElementById("botanical-details").hidden=!isOrange;
  document.getElementById("descricao").textContent=isOrange?"A laranjeira é uma árvore frutífera do grupo dos citros. Suas flores perfumadas atraem polinizadores, e seus frutos fazem parte da alimentação e da cultura agrícola de muitas famílias.":"Registro individual criado a partir do croqui. A identificação botânica e as informações sobre flores, frutos e importância ambiental serão conferidas e acrescentadas gradualmente.";
 
