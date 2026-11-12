@@ -46,6 +46,7 @@
       background: #285b38;
       color: white;
     }
+.hero-photo{margin:0 auto 22px;max-width:950px;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#164e32,#39794b);box-shadow:0 10px 30px #14392325;position:relative}.hero-photo img{display:block;width:100%;height:auto;max-height:650px;object-fit:contain}.hero-photo .photo-fallback{padding:40px 22px;text-align:center;color:white}.hero-photo .photo-fallback h2{color:white;font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 10px}.hero-photo .photo-fallback p{margin:6px auto;max-width:650px}.hero-photo figcaption{padding:10px 16px;text-align:center;background:#e5eee0;color:#31533a;font-size:.88rem}.hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}.hero-cta a{padding:12px 18px;border-radius:9px;text-decoration:none;font-weight:bold;background:white;color:#1c5133}.hero-cta a.secondary{background:#d8e8ce;color:#1c5133}a:focus-visible,button:focus-visible{outline:3px solid #efc469;outline-offset:3px}@media(max-width:600px){main{padding:18px 12px}.hero-photo{border-radius:12px}.hero-photo .photo-fallback{padding:30px 14px}}
   </style>
 </head>
 <body>
@@ -56,6 +57,16 @@
   </header>
 
   <main>
+    <figure class="hero-photo">
+      <img src="acolhida-beija-flor-pomar.png" alt="Arte de divulgação da Acolhida Beija-Flor e do Projeto Pomar do Peregrino, com portal de madeira, diversidade de frutíferas e informações de acolhimento." loading="eager" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <div class="photo-fallback" hidden>
+        <h2>🌿 Acolhida Beija-Flor</h2>
+        <p><strong>Pomar do Peregrino</strong> • Caminho do Louvor • Ituporanga/SC</p>
+        <p>Mais que hospedagem: um encontro de fé, acolhimento e gratidão.</p>
+        <div class="hero-cta"><a href="mapa-interativo.html">🗺️ Explorar o pomar</a><a class="secondary" href="catalogo.html">🌳 Conhecer as plantas</a></div>
+      </div>
+      <figcaption>Projeto Pomar do Peregrino • Natureza, educação ambiental e acolhimento</figcaption>
+    </figure>
     <section class="card"><h2>🗺️ Mapa Interativo do Pomar</h2><p>Encontre qualquer uma das 128 posições do croqui pelo código, nome da planta ou doador. Toque na árvore para consultar suas informações.</p><p><a class="botao" href="mapa-interativo.html" style="display:inline-block;background:#285b38;color:white;text-decoration:none;padding:12px 18px;border-radius:9px">Explorar mapa interativo</a></p><p><small>Mapa esquemático por linhas; as posições exatas no terreno ainda serão representadas.</small></p></section>
 <section class="card">
       <h2>Bem-vindo ao nosso pomar!</h2>
