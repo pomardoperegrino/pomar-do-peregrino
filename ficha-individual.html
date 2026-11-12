@@ -132,19 +132,10 @@ const isApple=/^maç[ãa]\b/i.test(f.nome);const appleReference={file:"Apples on
 // Busca fotografias reais e licenciadas no Wikimedia Commons quando não há foto curada.
 // A busca é por nome de referência, não uma identificação da muda nem garantia da cultivar.
 const searchNames=[
- [/^cortiça crespa/i,["Annona sylvatica","Annona neosalicifolia"]],
- [/^cortiça lisa/i,["Rollinia rugulosa","Annona rugulosa"]],
  [/^cabeludinha/i,["Myrciaria glazioviana","Plinia glomerata"]],
- [/^guabiroba/i,["Campomanesia xanthocarpa","Campomanesia"]],
  [/^cerejeira-do-rio-grande/i,["Eugenia involucrata"]],
  [/^fortunella/i,["Citrus japonica","Fortunella margarita"]],
  [/^guabiju/i,["Myrcianthes pungens"]],
- [/^guaçatonga/i,["Casearia sylvestris"]],
- [/^baga de macaco/i,["baga de macaco fruto"]],
- [/^ameixinha amarela/i,["Eriobotrya japonica"]],
- [/^cravo louro/i,["Syzygium aromaticum"]],
- [/^campari/i,["campari fruta árvore"]],
- [/^cipó-rabo-de-macaco/i,["cipó rabo de macaco planta"]],
  [/^tangerina/i,["Citrus reticulata"]],
  [/^pêssego/i,["Prunus persica"]],
  [/^ameixa/i,["Prunus salicina","Prunus domestica"]],
@@ -154,11 +145,7 @@ const searchNames=[
  [/^limão tahiti/i,["Citrus latifolia"]],
  [/^limão/i,["Citrus limon"]],
  [/^goiaba/i,["Psidium guajava"]],
- [/^ingá/i,["Inga edulis"]],
- [/^araçá/i,["Psidium cattleianum"]],
- [/^mirtilo/i,["Vaccinium corymbosum"]],
  [/^framboesa/i,["Rubus idaeus"]],
- [/^jabuticaba/i,["Plinia cauliflora"]],
  [/^pitanga/i,["Eugenia uniflora"]],
  [/^grumixama/i,["Eugenia brasiliensis"]],
  [/^uvaia/i,["Eugenia pyriformis"]],
@@ -171,8 +158,6 @@ const searchNames=[
  [/^café$/i,["Coffea arabica"]],
  [/^erva-mate/i,["Ilex paraguariensis"]],
  [/^nogueira/i,["Carya illinoinensis"]],
- [/^fisális/i,["Physalis peruviana"]],
- [/^amora/i,["Morus nigra"]],
  [/^maçã/i,["Malus domestica"]],
  [/^laranja/i,["Citrus sinensis"]]
 ];
@@ -225,8 +210,8 @@ async function findCommonsPhoto(name){
 }
 function loadCommonsReference(name){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
- if(/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro)$/i.test(name)){
-  status.textContent="Nome popular ou espécie ainda sem identificação botânica suficiente para escolher uma fotografia com segurança.";
+ if(/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro|ameixinha amarela|cortiça crespa|cortiça lisa|guabiroba crespa|guabiroba-do-campo|guaçatonga|amora portuguesa|fisális|ingá-.+|araçá-.+|mirtilo|jabuticaba)$/i.test(name)){
+  status.textContent="Fotografia não publicada automaticamente: é preciso conferir a identificação botânica para evitar mostrar frutos de outra espécie.";
   return;
  }
  status.textContent="Procurando fotografia real com licença de uso…";
@@ -235,7 +220,7 @@ function loadCommonsReference(name){
   img.onload=()=>{status.textContent=""};
   img.onerror=()=>{panel.hidden=true;status.textContent="A imagem de referência não pôde ser carregada neste momento."};
   img.src=p.url;
-  caption.textContent="Fotografia de referência pesquisada por ‘"+p.query+"’. A identificação da espécie ou cultivar da muda deve ser confirmada. Crédito: "+p.credit+" • "+p.license+" • ";
+  caption.textContent="Fotografia automática ainda não conferida visualmente, pesquisada por ‘"+p.query+"’. A identificação da espécie ou cultivar da muda deve ser confirmada. Crédito: "+p.credit+" • "+p.license+" • ";
   const link=document.createElement("a");link.href=p.source;link.textContent="Ver imagem, autoria e licença";link.target="_blank";link.rel="noopener noreferrer";caption.append(link);panel.hidden=false;
  }).catch(()=>{
   status.textContent="Fotografia do fruto ainda pendente de conferência. Estamos procurando uma imagem real, corretamente identificada e com autorização de uso. ";
