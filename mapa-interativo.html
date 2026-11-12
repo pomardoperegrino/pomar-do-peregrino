@@ -13,4 +13,4 @@ document.getElementById('share-tree').addEventListener('click',async()=>{const u
 function setView(mode){const illustrated=mode==='garden';map.classList.toggle('garden-view',illustrated);document.getElementById('view-grid').setAttribute('aria-pressed',String(!illustrated));document.getElementById('view-garden').setAttribute('aria-pressed',String(illustrated));document.getElementById('view-description').textContent=illustrated?'Vista ilustrada das posições do croqui. Os símbolos representam árvores cadastradas, sem confirmar plantio, tamanho ou distâncias reais.':'Grade de referência por linha e posição, sem escala geográfica.'}
 document.getElementById('view-grid').addEventListener('click',()=>setView('grid'));document.getElementById('view-garden').addEventListener('click',()=>setView('garden'));
 search.addEventListener('input',update);filter.addEventListener('change',update);const initial=decodeURIComponent(location.hash.slice(1)).toUpperCase();choose(plants.find(p=>p.codigo===initial)||plants.find(p=>p.codigo==='B07')||plants[0]);update();
-</script></body></html>
+</script><script src="estatisticas.js" defer></script></body></html>
