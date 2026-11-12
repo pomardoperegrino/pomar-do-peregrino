@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Painel de conferência das fotografias do Pomar do Peregrino"><title>Conferência de fotografias | Pomar do Peregrino</title><style>
+:root{font-family:system-ui,Arial,sans-serif;color:#24432e;background:#f4f8f1}*{box-sizing:border-box}body{margin:0}header{background:#285b38;color:white;padding:30px 16px;text-align:center}header h1{margin:0 0 8px}main{max-width:1080px;margin:auto;padding:20px 16px 50px}a{color:#21583b}.top{display:flex;gap:14px;flex-wrap:wrap;margin:15px 0}.top a{background:white;border:1px solid #bdd3bf;border-radius:10px;padding:10px 15px;text-decoration:none}.intro{line-height:1.6}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}.stat{background:white;padding:18px;border-radius:12px;border:1px solid #d7e6d6}.stat strong{display:block;font-size:1.9rem}input,select{font:inherit;border:1px solid #9db79f;padding:12px;border-radius:9px;background:white;width:100%}.filters{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin:20px 0}.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:10px}.item{background:white;border:1px solid #d5e4d4;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:7px}.item a{font-weight:700;text-decoration:none}.small{font-size:.87rem;color:#506957}.pill{font-size:.79rem;background:#e9f1e7;padding:4px 8px;border-radius:20px;align-self:start}footer{text-align:center;padding:22px;background:#e5efe3}@media(max-width:600px){.filters{grid-template-columns:1fr}}</style></head>
+<body><header><h1>🌿 Conferência das fotografias</h1><p>Pomar do Peregrino • Acolhida Beija-Flor</p></header>
+<main><nav class="top"><a href="index.html">⌂ Página inicial</a><a href="croqui-digital.html">🗺️ Croqui digital</a><a href="catalogo.html">🌳 Catálogo</a></nav>
+<p class="intro">Esta página ajuda a revisar as fotografias dos frutos em todas as posições cadastradas. <strong>“Foto fixa”</strong> indica que há um arquivo ou referência definida no código, mas ainda não garante que a imagem esteja correta ou carregando. <strong>“Busca automática”</strong> significa que a imagem depende de pesquisa no Wikimedia Commons e pode estar ausente. Os registros sem identificação ficam pendentes.</p>
+<div class="stats"><div class="stat"><strong id="total">—</strong>Posições no croqui</div><div class="stat"><strong id="fixas">—</strong>Com foto fixa</div><div class="stat"><strong id="automaticas">—</strong>Busca automática</div><div class="stat"><strong id="pendentes">—</strong>Identificação pendente</div></div>
+<div class="filters"><input id="busca" type="search" placeholder="Buscar por código ou nome da planta" aria-label="Buscar planta"><select id="filtro" aria-label="Filtrar por situação"><option value="todos">Todas as posições</option><option value="fixa">Foto fixa cadastrada</option><option value="automatica">Busca automática</option><option value="pendente">Identificação pendente</option></select></div>
+<p id="resultado" aria-live="polite"></p><div id="lista" class="list"></div>
+<p class="small">A contagem é baseada no cadastro e nas referências de fotos disponíveis no código em 12/11/2026. Para verificar visualmente a fotografia, abra a ficha correspondente. O cadastro de posição não confirma o plantio.</p>
+</main><footer>Pomar do Peregrino — Natureza, acolhimento e gratidão</footer>
+<script src="dados-plantas.js"></script><script>
+const plantas=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
+const fixas=new Set(["B01","B07","B08","E11","G02"]);
+const semIdentificacao=/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro)$/i;
+function situacao(p){if(semIdentificacao.test(p.nome))return "pendente";if(fixas.has(p.codigo)||/^pêssego\b/i.test(p.nome)||/^laranja\b/i.test(p.nome)||/^maç[ãa]\b/i.test(p.nome))return "fixa";return "automatica";}
+document.getElementById("total").textContent=plantas.length;
+document.getElementById("fixas").textContent=plantas.filter(p=>situacao(p)==="fixa").length;
+document.getElementById("automaticas").textContent=plantas.filter(p=>situacao(p)==="automatica").length;
+document.getElementById("pendentes").textContent=plantas.filter(p=>situacao(p)==="pendente").length;
+const busca=document.getElementById("busca"),filtro=document.getElementById("filtro"),lista=document.getElementById("lista");
+function render(){
+ const q=busca.value.trim().toLocaleLowerCase("pt-BR"),f=filtro.value;
+ const filtered=plantas.filter(p=>(f==="todos"||situacao(p)===f)&&(!q||(p.codigo+" "+p.nome).toLocaleLowerCase("pt-BR").includes(q)));
+ lista.replaceChildren();document.getElementById("resultado").textContent=filtered.length+" posição(ões) encontrada(s).";
+ for(const p of filtered){const box=document.createElement("article");box.className="item";const a=document.createElement("a");a.href="ficha-individual.html?codigo="+encodeURIComponent(p.codigo);a.textContent=p.codigo+" — "+p.nome;const status=document.createElement("span");status.className="pill";status.textContent=({fixa:"Foto fixa cadastrada · conferir",automatica:"Busca automática · conferir",pendente:"Identificação pendente"})[situacao(p)];const donor=document.createElement("span");donor.className="small";donor.textContent="Doador: "+(p.doador||"A confirmar");box.append(a,status,donor);lista.append(box);}
+}
+busca.addEventListener("input",render);filtro.addEventListener("change",render);render();
+</script><script src="estatisticas.js" defer></script></body></html>
