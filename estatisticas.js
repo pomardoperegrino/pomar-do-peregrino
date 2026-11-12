@@ -26,7 +26,7 @@
       const n = Number(String(data.count || "").replace(/[^0-9]/g, ""));
       if (!Number.isSafeInteger(n) || n < 0) throw new Error("contagem inválida");
       total.textContent = new Intl.NumberFormat("pt-BR").format(n) + " visualizações";
-      if (info) info.textContent = "Total de visualizações registradas desde a ativação das estatísticas.";
+      if (info) info.textContent = "Total registrado desde a ativação. O contador público pode levar até 4 horas para refletir novas visitas.";
     })
     .catch(() => {
       total.textContent = "Estatísticas em atualização";
