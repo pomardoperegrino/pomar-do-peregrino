@@ -5,7 +5,7 @@
  */
 (function () {
   "use strict";
-  const DOMINIO_GOATCOUNTER = "";
+  const DOMINIO_GOATCOUNTER = "pomardoperegrino.goatcounter.com";
   const total = document.getElementById("total-visitas");
   const info = document.getElementById("visitas-info");
   if (!DOMINIO_GOATCOUNTER) return;
@@ -30,6 +30,6 @@
     })
     .catch(() => {
       total.textContent = "Estatísticas em atualização";
-      if (info) info.textContent = "O registro pode estar funcionando mesmo quando o total público está indisponível.";
+      if (info) info.textContent = "Para exibir o número, ative em GoatCounter a opção Allow adding visitor counts on your website. O registro de acessos pode continuar funcionando.";
     });
 })();
