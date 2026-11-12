@@ -232,9 +232,9 @@ if(isIngaAnao){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
  img.alt="Fotografia de referência com vagens amareladas atribuídas ao ingá-anão; identificação botânica ainda não confirmada";
  img.onload=()=>{panel.hidden=false;status.textContent=""};
- img.onerror=()=>{panel.hidden=true;status.textContent="Fotografia do ingá-anão aguardando inclusão do arquivo inga anão.png no repositório."};
+ img.onerror=()=>{if(!img.dataset.tentativaLocal){img.dataset.tentativaLocal="sim";img.src="inga%20an%C3%A3o.png?v=2";return}panel.hidden=true;status.textContent="A fotografia do ingá-anão ainda não carregou. Confira o arquivo no GitHub ou tente atualizar a página.";};
  caption.textContent="Fotografia de referência enviada para o projeto. A identificação botânica, a autoria e a autorização de publicação precisam ser confirmadas. Não comprova a espécie nem retrata necessariamente a muda deste código.";
- img.src="inga%20an%C3%A3o.png";panel.hidden=false;
+ img.src="https://raw.githubusercontent.com/pomardoperegrino/pomar-do-peregrino/main/inga%20an%C3%A3o.png?v=2";panel.hidden=false;
 }
 const isPeach=/^pêssego\b/i.test(f.nome);
 if(isPeach){
