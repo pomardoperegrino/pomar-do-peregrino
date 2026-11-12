@@ -90,27 +90,42 @@ const searchNames=[
 const photoCache=new Map();
 async function findCommonsPhoto(name){
  if(photoCache.has(name))return photoCache.get(name);
- const queries=(searchNames.find(([re])=>re.test(name))||[])[1]||[name+" planta"];
+ const queries=(searchNames.find(([re])=>re.test(name))||[])[1]||[name+" fruta"];
  const promise=(async()=>{
-  for(const query of queries){
-   try{
-    const params=new URLSearchParams({action:"query",generator:"search",gsrsearch:"intitle:"+query,gsrnamespace:"6",gsrlimit:"20",prop:"imageinfo",iiprop:"url|extmetadata",iiurlwidth:"850",format:"json",origin:"*"});
-    const response=await fetch("https://commons.wikimedia.org/w/api.php?"+params.toString());
-    if(!response.ok)continue;
-    const data=await response.json();
-    const pages=Object.values(data.query?.pages||{}).sort((a,b)=>a.index-b.index);
-    for(const page of pages){
-     const info=page.imageinfo?.[0];
-     if(!info?.thumburl&&!info?.url)continue;
-     if(!/\.(jpe?g|png|webp)$/i.test(page.title||""))continue;
-     const license=info.extmetadata?.LicenseShortName?.value||"";
-     if(!/^(CC BY(?:-SA)?(?: [0-9.]+)?|CC0(?: [0-9.]+)?|Public domain|Domínio público)$/i.test(license))continue;
-     const clean=t=>String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
-     return {url:info.thumburl||info.url,source:info.descriptionurl,credit:clean(info.extmetadata?.Artist?.value)||"Autoria indicada na fonte",license,query};
-    }
-   }catch(e){/* Tentar próxima expressão de busca. */}
+  for(const species of queries){
+   const genus=species.trim().split(/\s+/)[0].toLowerCase();
+   const searches=[species+" fruit",species+" fruits",species+" fruto"];
+   for(const query of searches){
+    try{
+     const params=new URLSearchParams({action:"query",generator:"search",gsrsearch:query,gsrnamespace:"6",gsrlimit:"30",prop:"imageinfo",iiprop:"url|extmetadata",iiurlwidth:"850",format:"json",origin:"*"});
+     const response=await fetch("https://commons.wikimedia.org/w/api.php?"+params.toString());
+     if(!response.ok)continue;
+     const data=await response.json();
+     const pages=Object.values(data.query?.pages||{});
+     const scored=[];
+     for(const page of pages){
+      const info=page.imageinfo?.[0];
+      if(!info?.thumburl&&!info?.url)continue;
+      const title=String(page.title||"").toLowerCase();
+      if(!/\.(jpe?g|png|webp)$/i.test(title))continue;
+      const license=info.extmetadata?.LicenseShortName?.value||"";
+      if(!/^(CC BY(?:-SA)?(?: [0-9.]+)?|CC0(?: [0-9.]+)?|Public domain|Domínio público)$/i.test(license))continue;
+      const clean=t=>String(t||"").replace(/<[^>]*>/g," ").replace(/\s+/g," ").trim();
+      const description=clean(info.extmetadata?.ImageDescription?.value).toLowerCase();
+      const full=title+" "+description;
+      // Não aceitar imagens genéricas que não indiquem a espécie consultada.
+      if(!full.includes(genus))continue;
+      if(!/(fruit|fruto|fruta|fruits|berry|berries|pêssego|ameixa|laranja|pitanga|citrus|figo|guava|guava|guabiroba)/i.test(full))continue;
+      if(/\b(leaf|leaves|folha|folhas|bark|tronco|trunk|wood|seedling|muda|flower|flores|flor|herbarium|herbário)\b/i.test(title)&&!/(fruit|fruto|fruta|fruits)/i.test(title))continue;
+      const score=(title.includes(species.toLowerCase())?12:0)+(title.includes(genus)?5:0)+(/fruit|fruto|fruta|fruits/.test(title)?8:0)-Number(page.index||0)/100;
+      scored.push({score,url:info.thumburl||info.url,source:info.descriptionurl,credit:clean(info.extmetadata?.Artist?.value)||"Autoria indicada na fonte",license,query});
+     }
+     scored.sort((a,b)=>b.score-a.score);
+     if(scored.length)return scored[0];
+    }catch(e){/* Tentar outra busca. */}
+   }
   }
-  throw new Error("Nenhuma fotografia com licença confirmada");
+  throw new Error("Nenhuma fotografia de fruto com licença confirmada");
  })();
  photoCache.set(name,promise);
  return promise;
@@ -130,7 +145,7 @@ function loadCommonsReference(name){
   caption.textContent="Fotografia de referência pesquisada por ‘"+p.query+"’. A identificação da espécie ou cultivar da muda deve ser confirmada. Crédito: "+p.credit+" • "+p.license+" • ";
   const link=document.createElement("a");link.href=p.source;link.textContent="Ver imagem, autoria e licença";link.target="_blank";link.rel="noopener noreferrer";caption.append(link);panel.hidden=false;
  }).catch(()=>{
-  status.textContent="Fotografia licenciada ainda não localizada para este registro. ";
+  status.textContent="Ainda não foi encontrada fotografia do fruto com identificação e licença verificáveis. ";
   const link=document.createElement("a");link.href="https://commons.wikimedia.org/w/index.php?search="+encodeURIComponent(name)+"&title=Special:MediaSearch&type=image";link.textContent="Consultar imagens disponíveis";link.target="_blank";link.rel="noopener noreferrer";status.append(link);
  });
 }
