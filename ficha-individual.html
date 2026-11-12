@@ -196,7 +196,7 @@ const art=document.getElementById("plant-illustration");art.innerHTML="";documen
   document.getElementById("descricao").after(ref);
  }
  document.getElementById("botanical-details").hidden=!isOrange;
- document.getElementById("descricao").textContent=isOrange?"A laranjeira é uma árvore frutífera do grupo dos citros. Suas flores perfumadas atraem polinizadores, e seus frutos fazem parte da alimentação e da cultura agrícola de muitas famílias.":"Registro individual criado a partir do croqui. A identificação botânica e as informações sobre flores, frutos e importância ambiental serão conferidas e acrescentadas gradualmente.";
+ document.getElementById("descricao").textContent=code==="B05"?document.getElementById("descricao").textContent:isOrange?"A laranjeira é uma árvore frutífera do grupo dos citros. Suas flores perfumadas atraem polinizadores, e seus frutos fazem parte da alimentação e da cultura agrícola de muitas famílias.":"Registro individual criado a partir do croqui. A identificação botânica e as informações sobre flores, frutos e importância ambiental serão conferidas e acrescentadas gradualmente.";
 
 }else{
  document.getElementById("codigo").textContent="Código não encontrado";
