@@ -80,8 +80,8 @@
     </section>
     <section class="card visitor-counter" aria-labelledby="visitas-titulo">
       <h2 id="visitas-titulo">👣 Visitantes do nosso pomar digital</h2>
-      <p><strong id="total-visitas">Contador em preparação</strong></p>
-      <p id="visitas-info">Estamos preparando o registro de acessos. O número aparecerá aqui após a ativação do serviço de estatísticas.</p>
+      <p><strong id="total-visitas">Carregando visitas…</strong></p>
+      <p id="visitas-info">Consultando o total de visitas registradas pelo GoatCounter.</p>
       <p><small>O contador mostrará visualizações registradas, não necessariamente pessoas diferentes. Não exibimos dados pessoais dos visitantes.</small></p>
     </section>
     <section class="card" id="croqui" style="background:linear-gradient(135deg,#e1f0dc,#fff);border:1px solid #c8ddc3">
@@ -179,6 +179,6 @@ document.getElementById('copy-site-link').addEventListener('click',async()=>{
  catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}
 });
 </script>
-<script src="estatisticas.js" defer></script>
+<script src="estatisticas.js?v=20261112-2" defer></script>
 </body>
 </html>
