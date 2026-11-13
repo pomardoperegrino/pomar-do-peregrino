@@ -7,7 +7,7 @@
 <div class="stats"><div class="stat"><strong id="total">—</strong>Posições no croqui</div><div class="stat"><strong id="fixas">—</strong>Com referência fixa (não necessariamente validada)</div><div class="stat"><strong id="automaticas">—</strong>Dependem de busca automática</div><div class="stat"><strong id="pendentes">—</strong>Sem foto automática por cautela</div></div>
 <div class="filters"><input id="busca" type="search" placeholder="Buscar por código ou nome da planta" aria-label="Buscar planta"><select id="filtro" aria-label="Filtrar por situação"><option value="todos">Todas as posições</option><option value="fixa">Foto fixa cadastrada</option><option value="automatica">Busca automática</option><option value="pendente">Fotografia bloqueada para conferência</option></select></div>
 <p id="resultado" aria-live="polite"></p><p class="small"><strong>Atenção:</strong> os números indicam como a fotografia é selecionada, não quantas imagens foram verificadas ou aprovadas. Cada posição precisa de conferência visual e botânica.</p><p id="teste-arquivos" class="small" aria-live="polite">Verificando se as fotografias locais estão acessíveis…</p><p class="small">Dica: clique no código de uma planta para abrir sua ficha. Use “Próxima árvore” e “Árvore anterior” para continuar a conferência sem voltar a este painel.</p><div id="lista" class="list"></div>
-<p class="small">A contagem é dinâmica, baseada nas regras de seleção do código. As fichas da cabeludinha agora usam cabeludinha.png; as do ingá-anão usam a imagem local enviada. Foto fixa não significa fotografia visualmente aprovada. Para verificar visualmente a fotografia, abra a ficha correspondente. Plantio realizado de 6 a 10 de outubro de 2026, conforme informação do projeto.</p>
+<p class="small">A contagem é dinâmica, baseada nas regras de seleção do código. As fichas da cabeludinha agora usam cabeludinha.png; as do ingá-anão usam a imagem local enviada. Foto fixa não significa fotografia visualmente aprovada. Para verificar visualmente a fotografia, abra a ficha correspondente. O cadastro reúne posições do croqui; a presença de uma posição não confirma individualmente o plantio da muda. O projeto informa atividades de plantio entre 6 e 10 de outubro de 2026.</p>
 </main><footer>Pomar do Peregrino — Natureza, acolhimento e gratidão</footer>
 <script src="dados-plantas.js"></script><script>
 const plantas=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
@@ -30,7 +30,14 @@ function render(){
  const q=busca.value.trim().toLocaleLowerCase("pt-BR"),f=filtro.value;
  const filtered=plantas.filter(p=>(f==="todos"||situacao(p)===f)&&(!q||(p.codigo+" "+p.nome).toLocaleLowerCase("pt-BR").includes(q)));
  lista.replaceChildren();document.getElementById("resultado").textContent=filtered.length+" posição(ões) encontrada(s).";
- for(const p of filtered){const box=document.createElement("article");box.className="item";const a=document.createElement("a");a.href="ficha-individual.html?codigo="+encodeURIComponent(p.codigo);a.textContent=p.codigo+" — "+p.nome;const status=document.createElement("span");status.className="pill";status.textContent=({fixa:"Referência definida · verificar foto e autoria",automatica:"Busca automática · pode não carregar",pendente:"Sem foto automática · confirmar espécie"})[situacao(p)];const donor=document.createElement("span");donor.className="small";donor.textContent="Doador: "+(p.doador||"A confirmar");box.append(a,status,donor);lista.append(box);}
+ for(const p of filtered){const box=document.createElement("article");box.className="item";const a=document.createElement("a");a.href="ficha-individual.html?codigo="+encodeURIComponent(p.codigo);a.textContent=p.codigo+" — "+p.nome;const status=document.createElement("span");status.className="pill";status.textContent=({fixa:"Referência definida · verificar foto e autoria",automatica:"Busca automática · pode não carregar",pendente:"Sem foto automática · confirmar espécie"})[situacao(p)];const donor=document.createElement("span");donor.className="small";donor.textContent="Doador: "+(p.doador||"A confirmar");box.append(a,status,donor);
+ if(p.codigo==="B05"){
+  const aviso=document.createElement("span");aviso.className="small";
+  aviso.textContent="Cortiça-lisa: fotografia da Apremavi disponível somente por link; reprodução no site depende de autorização. Identificação da muda a confirmar.";
+  const fonte=document.createElement("a");fonte.href="https://apremavi.org.br/cortica-lisa-a-fruta-da-criancada/";fonte.target="_blank";fonte.rel="noopener noreferrer";fonte.textContent="Ver fotografias na Apremavi";
+  box.append(aviso,fonte);
+ }
+ lista.append(box);}
 }
 busca.addEventListener("input",render);filtro.addEventListener("change",render);render();
 </script><script src="estatisticas.js" defer></script></body></html>
