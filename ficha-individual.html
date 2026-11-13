@@ -287,6 +287,19 @@ const art=document.getElementById("plant-illustration");art.innerHTML="";documen
  ];
  const ciclo=ciclosRegionais.find(g=>g.re.test(f.nome));
  if(ciclo){document.getElementById("floracao-planta").textContent=ciclo.flor;document.getElementById("colheita-planta").textContent=ciclo.colheita;document.getElementById("producao-planta").textContent=ciclo.primeira}
+ const referenciasCultivares=[
+ {re:/^pêssego premier$/i,flor:"Referência Epagri para o Oeste de SC: floração em torno de 15 de julho. Não é uma medição da muda do pomar.",colheita:"Referência Epagri para o Oeste de SC: início de colheita em torno de 1º de outubro; pode variar em Ituporanga.",fruto:"Na avaliação da Epagri, o Premier apresenta frutos médios, polpa branca e caroço semiaderente.",fonte:"Epagri — Avaliação de cultivares de pêssego em Santa Catarina",url:"https://publicacoes.epagri.sc.gov.br/BT/article/download/423/318/2892"},
+ {re:/^maçã eva$|^maçã julieta$/i,flor:"Em Santa Catarina, cultivares de macieira de menor exigência em frio podem florescer entre meados de agosto e o início de novembro. O calendário exato desta cultivar no pomar precisa ser observado.",colheita:"Em Santa Catarina, a colheita de diferentes cultivares pode ocorrer do final de dezembro a abril. A época desta muda ainda precisa ser confirmada.",fruto:"A identidade da cultivar indicada no croqui deve ser conferida por etiqueta ou registro do viveiro antes de atribuir características específicas.",fonte:"Epagri — Cultivares de macieira para Santa Catarina",url:"https://publicacoes.epagri.sc.gov.br/livros/article/download/2200/1950"}
+ ];
+ const referenciaCultivar=referenciasCultivares.find(x=>x.re.test(f.nome));
+ if(referenciaCultivar){
+ document.getElementById("floracao-planta").textContent=referenciaCultivar.flor;
+ document.getElementById("colheita-planta").textContent=referenciaCultivar.colheita;
+ const bloco=document.createElement("p");bloco.className="muted";bloco.textContent="📚 Referência regional da variedade: ";
+ const a=document.createElement("a");a.href=referenciaCultivar.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=referenciaCultivar.fonte;bloco.append(a);
+ document.getElementById("producao-planta").after(bloco);
+ const observacao=document.createElement("p");observacao.className="note";observacao.textContent=referenciaCultivar.fruto;document.getElementById("frutos-especie").after(observacao);
+ }
  const gruposTecnicos=[
  {re:/^laranja|^tangerina|^limão|^fortunella/i,familia:"Rutaceae",porte:"Árvore ou arvoreta perene",luz:"Sol pleno",agua:"Irrigação de estabelecimento; evitar falta de água na brotação e frutificação.",solo:"Solo fértil, profundo e bem drenado.",clima:"Mudas jovens podem sofrer com geadas; proteger contra ventos frios.",pol:"Flores visitadas por abelhas; exigências de polinização variam entre cultivares.",poda:"Formação e limpeza, com orientação específica para citros.",usos:"Frutos para consumo e preparações culinárias; flores oferecem recursos a polinizadores."},
  {re:/^pêssego|^ameixa|^cerejeira/i,familia:"Rosaceae",porte:"Árvore frutífera caducifólia",luz:"Sol pleno",agua:"Manter umidade sem encharcamento, sobretudo na implantação.",solo:"Solo bem drenado.",clima:"Exigência de frio e suscetibilidade a geadas na floração variam por cultivar.",pol:"Polinização e necessidade de cultivar compatível variam conforme espécie e variedade.",poda:"Poda de formação e frutificação no período adequado à cultivar.",usos:"Frutos para consumo fresco e processamento."},
