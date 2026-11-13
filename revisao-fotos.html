@@ -6,7 +6,7 @@
 <p class="intro">Esta página ajuda a revisar as fotografias dos frutos em todas as posições cadastradas. <strong>“Foto fixa”</strong> indica que há um arquivo ou referência definida no código (incluindo as fotografias enviadas do ingá-anão e da cabeludinha), mas ainda não garante identificação botânica, licença ou carregamento em todos os aparelhos. <strong>“Busca automática”</strong> significa que a imagem depende de pesquisa no Wikimedia Commons e pode estar ausente. Quando a identificação é ambígua, a foto automática é bloqueada para não atribuir ao fruto uma espécie errada. As demais imagens automáticas também não foram validadas visualmente.</p>
 <div class="stats"><div class="stat"><strong id="total">—</strong>Posições no croqui</div><div class="stat"><strong id="fixas">—</strong>Com referência fixa (não necessariamente validada)</div><div class="stat"><strong id="automaticas">—</strong>Dependem de busca automática</div><div class="stat"><strong id="pendentes">—</strong>Sem foto automática por cautela</div></div>
 <div class="filters"><input id="busca" type="search" placeholder="Buscar por código ou nome da planta" aria-label="Buscar planta"><select id="filtro" aria-label="Filtrar por situação"><option value="todos">Todas as posições</option><option value="fixa">Foto fixa cadastrada</option><option value="automatica">Busca automática</option><option value="pendente">Fotografia bloqueada para conferência</option></select></div>
-<p id="resultado" aria-live="polite"></p><p class="small"><strong>Atenção:</strong> os números indicam como a fotografia é selecionada, não quantas imagens foram verificadas ou aprovadas. Cada posição precisa de conferência visual e botânica.</p><p id="teste-arquivos" class="small" aria-live="polite">Verificando se as fotografias locais estão acessíveis…</p><p class="small">Dica: clique no código de uma planta para abrir sua ficha. Use “Próxima árvore” e “Árvore anterior” para continuar a conferência sem voltar a este painel.</p><div id="lista" class="list"></div>
+<p id="resultado" aria-live="polite"></p><p class="small"><strong>Atenção:</strong> os números indicam como a fotografia é selecionada, não quantas imagens foram verificadas ou aprovadas. Cada posição precisa de conferência visual e botânica.</p><p id="teste-arquivos" class="small" aria-live="polite">Verificando se as fotografias locais estão acessíveis…</p><p class="small"><strong>Próxima prioridade:</strong> confira primeiro as posições sem foto automática. A cortiça-lisa (B05) possui referência externa da Apremavi, mas ainda não tem imagem autorizada incorporada.</p><p class="small">Dica: clique no código de uma planta para abrir sua ficha. Use “Próxima árvore” e “Árvore anterior” para continuar a conferência sem voltar a este painel.</p><div id="lista" class="list"></div>
 <p class="small">A contagem é dinâmica, baseada nas regras de seleção do código. As fichas da cabeludinha agora usam cabeludinha.png; as do ingá-anão usam a imagem local enviada. Foto fixa não significa fotografia visualmente aprovada. Para verificar visualmente a fotografia, abra a ficha correspondente. O cadastro reúne posições do croqui; a presença de uma posição não confirma individualmente o plantio da muda. O projeto informa atividades de plantio entre 6 e 10 de outubro de 2026.</p>
 </main><footer>Pomar do Peregrino — Natureza, acolhimento e gratidão</footer>
 <script src="dados-plantas.js"></script><script>
@@ -18,12 +18,12 @@ document.getElementById("total").textContent=plantas.length;
 document.getElementById("fixas").textContent=plantas.filter(p=>situacao(p)==="fixa").length;
 document.getElementById("automaticas").textContent=plantas.filter(p=>situacao(p)==="automatica").length;
 document.getElementById("pendentes").textContent=plantas.filter(p=>situacao(p)==="pendente").length;
-const arquivosLocais=[{nome:"Cabeludinha",arquivo:"cabeludinha.png"},{nome:"Ingá-anão",arquivo:"inga%20an%C3%A3o.png"}];
+const arquivosLocais=[{nome:"Cabeludinha",arquivo:"cabeludinha.png"},{nome:"Ingá-anão",arquivo:"inga%20an%C3%A3o.png"},{nome:"Pêssego",arquivo:"pessego.jpeg"}];
 Promise.all(arquivosLocais.map(item=>new Promise(resolve=>{
  const img=new Image();
  img.onload=()=>resolve(item.nome+": arquivo carregado");
  img.onerror=()=>resolve(item.nome+": arquivo indisponível");
- img.src=item.arquivo+"?auditoria=20261112";
+ img.src=item.arquivo+"?auditoria=20261113";
 }))).then(resultados=>{document.getElementById("teste-arquivos").textContent="Teste de carregamento neste navegador — "+resultados.join(" | ")+". Este teste não confirma a espécie nem os direitos de uso.";});
 const busca=document.getElementById("busca"),filtro=document.getElementById("filtro"),lista=document.getElementById("lista");
 function render(){
