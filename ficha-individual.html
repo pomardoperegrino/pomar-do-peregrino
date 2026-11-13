@@ -231,6 +231,15 @@ function loadCommonsReference(name){
   const link=document.createElement("a");link.href="https://commons.wikimedia.org/w/index.php?search="+encodeURIComponent(name)+"&title=Special:MediaSearch&type=image";link.textContent="Consultar imagens disponíveis";link.target="_blank";link.rel="noopener noreferrer";status.append(link);
  });
 }
+const isCabeludinha=/^cabeludinha$/i.test(f.nome);
+if(isCabeludinha){
+ const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
+ img.alt="Fotografia de referência de frutos arredondados verdes e amarelos, associados à cabeludinha";
+ img.onload=()=>{panel.hidden=false;status.textContent="";document.querySelector(".plant-art").hidden=true};
+ img.onerror=()=>{panel.hidden=true;status.textContent="A fotografia da cabeludinha não carregou; confira o arquivo cabeludinha.png no GitHub."};
+ caption.textContent="Fotografia de referência enviada para o Pomar do Peregrino. A identificação botânica exata, a autoria e a autorização de publicação ainda precisam ser confirmadas. A imagem não representa necessariamente a muda desta posição.";
+ img.src="cabeludinha.png?v=2";panel.hidden=false;
+}
 const isIngaAnao=/^ingá-anão$/i.test(f.nome);
 if(isIngaAnao){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
