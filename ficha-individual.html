@@ -367,7 +367,7 @@ const art=document.getElementById("plant-illustration");art.innerHTML="";documen
  const setTec=(id,valor)=>{if(valor)document.getElementById(id).textContent=valor};
  if(tecnico){for(const [id,chave] of [["familia-botanica","familia"],["porte-planta","porte"],["luz-planta","luz"],["agua-planta","agua"],["solo-planta","solo"],["clima-planta","clima"],["polinizacao-planta","pol"],["poda-planta","poda"],["usos-planta","usos"]])setTec(id,tecnico[chave])}
  document.getElementById("doador").textContent=f.doador||"A confirmar";
- if(f.procedenciaViveiro){const dado=document.createElement("p");dado.style.fontSize=".9rem";dado.textContent="Procedência da muda: "+f.procedenciaViveiro+" (informada pelo responsável pelo pomar; não confundir com o doador).";document.getElementById("doador").parentElement.insertAdjacentElement("afterend",dado);}
+ if(f.procedenciaViveiro){const dado=document.createElement("p");dado.style.fontSize=".9rem";dado.textContent="Procedência da muda: "+f.procedenciaViveiro+" (informada pelo responsável pelo pomar; não confundir com o doador).";if(f.procedenciaViveiro.includes("Beija Flor")){const link=document.createElement("a");link.href="https://www.instagram.com/viveirobeijaflor12/";link.target="_blank";link.rel="noopener noreferrer";link.textContent=" · Conhecer o viveiro";dado.append(link);}document.getElementById("doador").parentElement.insertAdjacentElement("afterend",dado);}
  document.getElementById("posicao").textContent="Posição "+code+" no croqui";
  if(code==="B05"){
   document.getElementById("cientifico").textContent="Rollinia rugulosa Schltdl. (referência regional; identificação da muda a confirmar)";
