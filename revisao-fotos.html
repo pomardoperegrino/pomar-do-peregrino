@@ -51,6 +51,12 @@ function render(){
   const fonte=document.createElement("a");fonte.href="https://unsplash.com/pt-br/fotografias/mirtilos-maduros-em-arbusto-verde-qMzG6nYXUFc";fonte.target="_blank";fonte.rel="noopener noreferrer";fonte.textContent="Ver fotografia de mirtilo na Unsplash";
   box.append(nota,fonte);
  }
+ if(["F11","F12","G11"].includes(p.codigo)){
+  const nota=document.createElement("span");nota.className="small";
+  nota.textContent="Jabuticaba: referência visual encontrada em página comercial Brighter Blooms; não há licença de reutilização da fotografia confirmada. Não copiar a imagem para o site.";
+  const fonte=document.createElement("a");fonte.href="https://www.brighterblooms.com/products/jabuticaba-tree";fonte.target="_blank";fonte.rel="noopener noreferrer";fonte.textContent="Ver referência de jabuticaba (site externo)";
+  box.append(nota,fonte);
+ }
  if(p.codigo==="B05"){
   const aviso=document.createElement("span");aviso.className="small";
   aviso.textContent="Cortiça-lisa: fotografia da Apremavi disponível somente por link; reprodução no site depende de autorização. Identificação da muda a confirmar.";
