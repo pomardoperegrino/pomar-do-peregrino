@@ -46,6 +46,11 @@ function render(){
  lista.replaceChildren();document.getElementById("resultado").textContent=filtered.length+" posição(ões) encontrada(s).";
  for(const p of filtered){const box=document.createElement("article");box.className="item";const a=document.createElement("a");a.href="ficha-individual.html?codigo="+encodeURIComponent(p.codigo);a.textContent=p.codigo+" — "+p.nome;const status=document.createElement("span");status.className="pill";status.textContent=({fixa:"Referência definida · verificar foto e autoria",automatica:"Busca automática · pode não carregar",pendente:"Sem foto automática · confirmar espécie"})[situacao(p)];const donor=document.createElement("span");donor.className="small";donor.textContent="Doador: "+(p.doador||"A confirmar");box.append(a,status,donor);
  if(p.codigo==="A19"||p.codigo==="A20"){
+  const origem=document.createElement("span");origem.className="small";
+  origem.textContent="Procedência: Mondini Plantas, Pouso Redondo/SC. A19 e A20 são da mesma variedade; nome da cultivar ainda não confirmado.";
+  box.append(origem);
+ }
+ if(p.codigo==="A19"||p.codigo==="A20"){
   const nota=document.createElement("span");nota.className="small";
   nota.textContent="Mirtilo: fotografia de referência encontrada na Unsplash; conferir autoria, licença específica e correspondência visual antes de incorporar.";
   const fonte=document.createElement("a");fonte.href="https://unsplash.com/pt-br/fotografias/mirtilos-maduros-em-arbusto-verde-qMzG6nYXUFc";fonte.target="_blank";fonte.rel="noopener noreferrer";fonte.textContent="Ver fotografia de mirtilo na Unsplash";
