@@ -56,6 +56,7 @@ function render(){
   nota.textContent="Jabuticaba: referência visual encontrada em página comercial Brighter Blooms; não há licença de reutilização da fotografia confirmada. Não copiar a imagem para o site.";
   const fonte=document.createElement("a");fonte.href="https://www.brighterblooms.com/products/jabuticaba-tree";fonte.target="_blank";fonte.rel="noopener noreferrer";fonte.textContent="Ver referência de jabuticaba (site externo)";
   box.append(nota,fonte);
+  const wiki=document.createElement("a");wiki.href="https://pt.wikipedia.org/wiki/Jabuticaba";wiki.target="_blank";wiki.rel="noopener noreferrer";wiki.textContent="Consultar jabuticaba na Wikipédia e conferir licença da foto no Wikimedia Commons";box.append(wiki);
  }
  if(p.codigo==="B05"){
   const aviso=document.createElement("span");aviso.className="small";
