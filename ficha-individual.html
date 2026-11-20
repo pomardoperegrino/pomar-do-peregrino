@@ -288,12 +288,12 @@ if(isIngaAnao){
  img.src="https://raw.githubusercontent.com/pomardoperegrino/pomar-do-peregrino/main/inga%20an%C3%A3o.png?v=2";panel.hidden=false;
 }
 const isPeach=/^pêssego\b/i.test(f.nome);
-if(isPeach&&!/^pêssego (delicioso|premier)$/i.test(f.nome)){
+if(isPeach){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption");
  img.src="pessego.jpeg";img.alt="Fotografia real de pêssegos rosados crescendo nos galhos de um pessegueiro";
  img.onload=()=>{document.querySelector(".plant-art").hidden=true;document.getElementById("photo-status").textContent=""};
  img.onerror=()=>{panel.hidden=true;document.getElementById("photo-status").textContent="Fotografia do pessegueiro indisponível no momento."};
- caption.textContent="Fotografia real de pêssegos enviada para o projeto. Imagem ilustrativa da espécie; não confirma a cultivar "+f.nome+" nem representa necessariamente a muda cadastrada.";
+ caption.textContent="🍑 Fotografia ilustrativa de frutos de pessegueiro enviada ao projeto. A imagem NÃO confirma a variedade "+f.nome+" nem representa a muda cadastrada. Para as variedades Delicioso e Premier, consulte também as referências específicas abaixo.";
  panel.hidden=false;
 }
 const orangeCultivarPhotos=[
