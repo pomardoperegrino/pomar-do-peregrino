@@ -89,18 +89,19 @@
   </nav>
   <main id="conteudo"><section class="visitor-start" aria-label="Acesso rápido para peregrinos"><h2>🌿 Explore o pomar pelo celular</h2><p>Escolha como deseja conhecer nossas árvores.</p><div class="visitor-actions"><a class="primary" href="croqui-digital.html">🌳 Encontrar uma árvore</a><a href="mapa-interativo.html">🗺️ Ver o mapa</a><a href="passeio-virtual.html">🚶 Passeio virtual</a><a href="catalogo.html">📖 Conhecer espécies</a></div></section>
     <section class="card quick-search" id="inicio" aria-labelledby="encontre-arvore">
-      <h2 id="encontre-arvore">🔎 Encontre uma árvore pelo código</h2>
-      <p>Viu uma placa no pomar? Digite o código para abrir diretamente a ficha da planta.</p>
-      <form id="search-code-form">
-        <input id="tree-code-input" name="codigo" aria-label="Código da árvore" placeholder="Ex.: B07, C12, F09" autocomplete="off" maxlength="3" pattern="[A-Ja-j][0-9]{2}" required>
-        <button type="submit">Consultar árvore</button>
-      </form>
-      <p id="search-code-feedback" role="status" aria-live="polite"></p>
-      <div style="margin-top:18px"><label for="plant-name-input"><strong>Ou procure pelo nome da fruta ou da planta</strong></label><input id="plant-name-input" type="search" placeholder="Ex.: uvaia, pitanga, caqui" autocomplete="off" aria-controls="plant-name-results" aria-describedby="plant-name-help" style="display:block;width:100%;font-size:16px;padding:13px;border:1px solid #a9c5a6;border-radius:9px;margin-top:6px"><p id="plant-name-help" class="hint">Toque em um resultado para abrir a ficha da planta e ver seu código no pomar.</p><div id="plant-name-results" class="name-results" role="region" aria-label="Resultados da busca por planta" aria-live="polite" hidden></div></div>
-      <p class="hint">Não sabe o código? <a href="mapa-interativo.html">Pesquise pelo nome da planta no mapa interativo.</a></p>
-      <div class="mini-stats"><span><strong>128</strong> posições no croqui</span><span><strong>Mapa interativo</strong> por código</span><span><strong>Fichas individuais</strong> de consulta</span></div>
-    </section>
-    <section class="card visitor-counter" aria-labelledby="visitas-titulo">
+<h2 id="encontre-arvore">🔎 Encontre uma árvore pelo nome ou código</h2>
+<p>Digite o nome da planta (por exemplo, <strong>uvaia</strong>) ou o código da placa (por exemplo, <strong>D16</strong>).</p>
+<form id="search-code-form" role="search">
+<label for="tree-code-input" style="display:block;width:100%;font-weight:bold">Nome da planta ou código</label>
+<input id="tree-code-input" name="busca" type="search" aria-label="Nome da planta ou código da árvore" aria-controls="plant-name-results" placeholder="Ex.: uvaia, pitanga ou D16" autocomplete="off" required style="font-size:16px">
+<button type="submit">🔎 Buscar planta</button>
+</form>
+<p id="search-code-feedback" role="status" aria-live="polite"></p>
+<div id="plant-name-results" class="name-results" role="region" aria-label="Plantas encontradas" aria-live="polite" hidden></div>
+<p class="hint">Toque no resultado para abrir a ficha e conferir a posição no pomar. <a href="mapa-interativo.html">Ver mapa interativo</a>.</p>
+<div class="mini-stats"><span><strong>128</strong> posições no croqui</span><span><strong>Busca</strong> por nome ou código</span><span><strong>Fichas individuais</strong> de consulta</span></div>
+</section>
+<section class="card visitor-counter" aria-labelledby="visitas-titulo">
       <h2 id="visitas-titulo">👣 Visitantes do nosso pomar digital</h2>
       <p><strong id="total-visitas">Carregando visitas…</strong></p>
       <p id="visitas-info">Consultando o total de visitas registradas pelo GoatCounter.</p>
@@ -242,32 +243,43 @@
     Pomar do Peregrino – Acolhida Beija-Flor
     <p>Um lugar para acolher, aprender e preservar.</p>
   </footer>
+<script src="dados-plantas.js"></script>
 <script>
-document.getElementById('search-code-form').addEventListener('submit',event=>{
- event.preventDefault();
- const code=document.getElementById('tree-code-input').value.trim().toUpperCase();
- if(!/^[A-J][0-9]{2}$/.test(code)){document.getElementById('search-code-feedback').textContent='Digite um código no formato B07.';return}
- location.href='ficha-individual.html?v=20261112-plantio&codigo='+encodeURIComponent(code);
-});
+(function(){
+ const form=document.getElementById('search-code-form');
+ const input=document.getElementById('tree-code-input');
+ const feedback=document.getElementById('search-code-feedback');
+ const results=document.getElementById('plant-name-results');
+ const plants=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
+ const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+ function render(){
+  const q=normalize(input.value.trim());results.replaceChildren();feedback.textContent='';
+  if(!q){results.hidden=true;return [];}
+  const matches=plants.filter(p=>normalize(p.nome).includes(q)||normalize(p.codigo).includes(q));
+  results.hidden=false;
+  if(!matches.length){const p=document.createElement('p');p.textContent='Nenhuma planta encontrada. Confira o nome ou código.';results.append(p);return [];}
+  const visible=matches.slice(0,25);
+  for(const plant of visible){const a=document.createElement('a');a.href='ficha-individual.html?codigo='+encodeURIComponent(plant.codigo);const name=document.createElement('span');name.textContent=plant.nome;const code=document.createElement('small');code.textContent='Posição '+plant.codigo;a.append(name,code);results.append(a);}
+  if(matches.length>visible.length){const p=document.createElement('p');p.textContent='Mostrando os primeiros 25 resultados. Digite mais letras para refinar.';results.append(p);}
+  return matches;
+ }
+ input.addEventListener('input',render);
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const q=normalize(input.value.trim());
+  if(!q){feedback.textContent='Digite o nome ou o código de uma planta.';return;}
+  const exact=plants.find(p=>normalize(p.codigo)===q);
+  if(exact){location.href='ficha-individual.html?codigo='+encodeURIComponent(exact.codigo);return;}
+  const matches=render();
+  if(matches.length===1){location.href='ficha-individual.html?codigo='+encodeURIComponent(matches[0].codigo);return;}
+  if(matches.length>1){feedback.textContent='Encontramos '+matches.length+' posições. Toque na planta desejada abaixo.';}
+ });
+})();
 document.getElementById('copy-site-link').addEventListener('click',async()=>{
  const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';
  try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado! Cole na bio do Instagram ou envie aos amigos.'}
  catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}
 });
-</script>
-<script src="dados-plantas.js"></script>
-<script>
-(function(){
- const input=document.getElementById('plant-name-input'),results=document.getElementById('plant-name-results');
- const plants=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
- const normalize=value=>String(value||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLocaleLowerCase('pt-BR');
- input.addEventListener('input',()=>{
-  const q=normalize(input.value.trim());results.replaceChildren();results.hidden=!q;if(!q)return;
-  const found=plants.filter(p=>normalize(p.nome).includes(q)||normalize(p.codigo).includes(q)).slice(0,12);
-  if(!found.length){const p=document.createElement('p');p.textContent='Nenhuma planta encontrada. Tente outro nome.';results.append(p);return;}
-  for(const p of found){const a=document.createElement('a');a.href='ficha-individual.html?codigo='+encodeURIComponent(p.codigo);const name=document.createElement('span');name.textContent=p.nome;const code=document.createElement('small');code.textContent='Posição '+p.codigo;a.append(name,code);results.append(a)}
- });
-})();
 </script>
 <script src="estatisticas.js?v=20261112-2" defer></script>
 </body>
