@@ -244,7 +244,7 @@ if(f){
  document.querySelectorAll('.back-to-croqui').forEach(a=>{a.href='croqui-digital.html#'+encodeURIComponent(code)});
  document.title=code+" • "+f.nome+" | Pomar do Peregrino";
 document.getElementById('show-on-map').href='croqui-digital.html#'+encodeURIComponent(code);document.getElementById('locate-plant-now').href='croqui-digital.html#'+encodeURIComponent(code);
-document.getElementById('curiosity-map-link').href='mapa-interativo.html#'+encodeURIComponent(code);
+// O atalho duplicado foi removido da página; o link principal ao croqui permanece ativo.
 document.getElementById('copy-tree').addEventListener('click',async()=>{const url=location.href;try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado!'}catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}});
 const isOrange=/^laranja\b/i.test(f.nome);
 // Não reutilizar uma foto genérica de laranja como se identificasse uma cultivar.
