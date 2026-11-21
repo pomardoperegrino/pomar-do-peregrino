@@ -46,3 +46,12 @@ A classificação abaixo é uma **triagem de mecanismos presentes no código**, 
 - [ ] Fonte, autoria e licença ou autorização conferidas
 - [ ] Legenda educativa visível e texto alternativo adequado
 - [ ] Botões e croqui funcionam no celular
+
+## Atualização — primeira rodada das 13 pendências (21/11/2026)
+Foram adicionadas três referências educativas fixas a `ficha-individual.html` (com nome da espécie da imagem, autoria, licença e link para a fonte):
+- **Jabuticaba:** `Plinia cauliflora.jpg`, Bruno.karklis, CC BY-SA 3.0. Exemplo de *Plinia cauliflora*; a espécie da muda não foi confirmada.
+- **Araçá-amarelo:** `Starr 031002-0037 Psidium cattleianum.jpg`, Forest & Kim Starr, CC BY 3.0. Exemplo de *Psidium cattleianum* de frutos amarelos; a espécie da muda não foi confirmada.
+- **Ingá-de-metro:** `Inga edulis, fruit.jpg`, Burkhard Mücke, CC BY-SA 4.0. Exemplo de *Inga edulis*; a espécie da muda não foi confirmada.
+Fontes: https://commons.wikimedia.org/wiki/File:Plinia_cauliflora.jpg ; https://commons.wikimedia.org/wiki/File:Starr_031002-0037_Psidium_cattleianum.jpg ; https://commons.wikimedia.org/wiki/File:Inga_edulis,_fruit.jpg
+
+**Pendentes nesta rodada:** Ameixinha Amarela, Amora Portuguesa, Baga de Macaco, Campari, Cipó-rabo-de-macaco, Cortiça Lisa, Cravo Louro, Falta identificar, Ingá-banana e Ingá-feijão. Antes de selecionar uma espécie, conferir o nome científico no viveiro ou com o responsável. As 3 referências adicionadas ainda precisam ser testadas no site publicado e avaliadas visualmente em celular.
