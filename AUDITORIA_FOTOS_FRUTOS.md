@@ -1,146 +1,39 @@
-# Auditoria de fotografias — Pomar do Peregrino
+# Auditoria de imagens — Pomar do Peregrino
+Atualização: 21/11/2026. Base: código do repositório GitHub. **Esta é uma auditoria documental e de referências, não uma aprovação visual das fotografias.**
 
-Data: 12/11/2026. Cadastro: 128 posições, 73 nomes distintos. Este relatório audita **o código**, não comprova visualmente que cada foto carregou ou que a espécie está correta.
+## O que existe
+- 128 posições cadastradas no índice `dados-plantas.js`, referentes ao croqui de 05/11/2026; não equivalem à confirmação individual do plantio.
+- 35 posições possuem referência fotográfica explícita no objeto `photoReferences` de `ficha-individual.html`. Muitas posições compartilham a mesma imagem da espécie ou grupo; 35 **não** significa 35 fotos distintas.
+- O código também possui tratamentos específicos para arquivos locais de **cabeludinha** (`cabeludinha.png`), **ingá-anão** (`inga anão.png`) e **pêssego** (`pessego.jpeg`), utilizados em múltiplas posições. Os arquivos constam no repositório.
+- Para outras plantas, há tentativa de pesquisa automática no Wikimedia Commons. Esse mecanismo **não** comprova que a imagem será encontrada, carregará ou corresponderá à cultivar.
+- Certos nomes ambíguos têm a busca automática bloqueada para evitar atribuições erradas.
+- As fotografias do terreno e da aquisição de mudas documentam o projeto, mas não substituem fotografias botânicas identificadas.
 
-## Critérios
-- Foto real do **fruto** e, se possível, na planta; evitar troncos, folhas isoladas e ilustrações.
-- A foto deve ter autoria e licença de uso verificáveis.
-- A foto de referência não comprova a cultivar ou a muda específica do pomar.
-- Nomes regionais ambíguos requerem identificação antes da atribuição definitiva.
+## Melhorias aplicadas nesta revisão
+- Em `ficha-individual.html`, a imagem do ingá-anão passa a usar o arquivo relativo local como fonte principal, evitando dependência do endereço `raw.githubusercontent.com`.
+- Esta auditoria foi atualizada para reconhecer as referências adicionadas ao código depois do relatório de 12/11/2026.
 
-## Referências explícitas no código (5)
-- B01 — Guabiroba-do-campo (foto cadastrada; ainda sujeita a conferência visual e licença)
-- B07 — Laranja Champagne (foto cadastrada; ainda sujeita a conferência visual e licença)
-- B08 — Laranja Champagne (foto cadastrada; ainda sujeita a conferência visual e licença)
-- E11 — Maçã Eva (foto cadastrada; ainda sujeita a conferência visual e licença)
-- G02 — Ingá-chinelo (foto cadastrada; ainda sujeita a conferência visual e licença)
+## Pontos de atenção
+1. **Não marcar fotos como verificadas apenas porque há URL ou arquivo no código.** Conferir visualmente fruto, folhas, legenda e correspondência com a espécie.
+2. Verificar nome científico e cultivar com registro do viveiro, etiqueta ou profissional habilitado, sobretudo para cortiça-crespa/lisa, guabirobas, ingás, fisális, campari, ameixinha-amarela, cravo-louro e espécies não identificadas.
+3. Para imagens do Wikimedia Commons, conferir na página original o arquivo, a autoria, a licença vigente e as exigências de atribuição.
+4. Para imagens recebidas por mensagem, registrar autoria e autorização de publicação antes de considerar definitivas.
+5. Priorizar fotos nítidas do **fruto**, preferencialmente ainda na planta, com enquadramento adequado para celular e texto alternativo descritivo.
+6. Fotos de referência de uma espécie não comprovam a identidade da muda plantada nem a cultivar comercial.
+7. Confirmar o carregamento das imagens no site publicado em celular e computador; testes de código não substituem esse teste.
 
-## Registros sem foto fixa revisada (123)
-A busca automática foi reforçada para priorizar frutos, mas **não garante foto disponível**. Cada posição abaixo requer validação individual e eventual foto fixa:
+## Ordem sugerida de trabalho
+- **Etapa 1:** confirmar os arquivos locais de cabeludinha, ingá-anão e pêssego e verificar suas autorizações.
+- **Etapa 2:** conferir visualmente as 35 referências explícitas, agrupando por espécie para não repetir trabalho.
+- **Etapa 3:** substituir gradualmente buscas automáticas por imagens fixas, verificadas, com crédito e licença.
+- **Etapa 4:** completar as espécies sem fotografia confiável, sem usar imagens incorretas apenas para preencher espaços.
+- **Etapa 5:** validar as fichas e QR Codes em celular antes de imprimir placas.
 
-- A15 — Ingá-anão
-- A16 — Cabeludinha
-- A17 — Ingá-anão
-- A18 — Cabeludinha
-- A19 — Mirtilo
-- A20 — Mirtilo
-- A21 — Ingá-anão
-- B02 — Pitanga
-- B03 — Pitanga
-- B04 — Cortiça Crespa
-- B05 — Cortiça Lisa
-- B06 — Laranja Umbigo
-- B09 — Laranja Sanguínea
-- B10 — Laranja Sanguínea
-- B11 — Laranja Lima
-- B12 — Laranja Lima
-- B13 — Laranja Valência
-- B14 — Laranja Valência
-- B15 — Laranja Folha Murcha
-- B16 — Laranja Folha Murcha
-- B17 — Framboesa
-- B18 — Framboesa
-- B19 — Ingá-anão
-- B20 — Fisális
-- B21 — Cerejeira-do-rio-grande
-- C01 — Guabiroba-do-campo
-- C02 — Goiaba Amarela
-- C03 — Goiaba Amarela
-- C04 — Guabiroba Crespa
-- C05 — Guabiroba Crespa
-- C06 — Fortunella Xim Xim
-- C07 — Fortunella Xim Xim
-- C08 — Tangerina Mexerica
-- C09 — Tangerina Mexerica
-- C10 — Tangerina Satsuma Okitsu
-- C11 — Tangerina Satsuma Okitsu
-- C12 — Tangerina Montenegrina
-- C13 — Tangerina Montenegrina
-- C14 — Tangerina Ponkan
-- C15 — Tangerina Ponkan
-- C17 — Laranja Açúcar
-- C18 — Fisális
-- C19 — Erva-mate
-- C20 — Cerejeira-do-rio-grande
-- C21 — Cerejeira-do-rio-grande
-- D01 — Grumixama
-- D02 — Guabiju
-- D03 — Guaçatonga
-- D04 — Ameixa Coração de Boi
-- D05 — Pêssego Delicioso
-- D06 — Pêssego Delicioso
-- D07 — Pêssego Premier
-- D08 — Pêssego Premier
-- D09 — Figo Roxo de Valinhos
-- D10 — Figo Roxo de Valinhos
-- D11 — Caqui Kioto (Chocolate)
-- D12 — Caqui Kioto (Chocolate)
-- D13 — Caqui Kioto (Chocolate)
-- D14 — Caqui Kioto (Chocolate)
-- D15 — Caqui Fuyu
-- D16 — Uvaia
-- D17 — Goiaba Vermelha
-- D18 — Goiaba Vermelha
-- D19 — Baga de Macaco
-- D20 — Baga de Macaco
-- E01 — Falta identificar
-- E02 — Falta identificar
-- E03 — Falta identificar
-- E04 — Lichia
-- E05 — Pêssego Ouro Mel
-- E06 — Pêssego Ouro Mel
-- E07 — Pêssego Douradão
-- E08 — Pêssego Douradão
-- E09 — Pêssego Comum
-- E10 — Maçã Julieta
-- E12 — Limão Siciliano
-- E13 — Limão Tahiti
-- E15 — Caqui Fuyu
-- E16 — Fisális
-- E17 — Amora Portuguesa
-- E18 — Amora Portuguesa
-- E20 — Ameixinha Amarela
-- F01 — Café
-- F02 — Mamão
-- F03 — Lichia
-- F04 — Ameixa Coração de Boi
-- F05 — Ameixa Roxa Comum
-- F06 — Ameixa Roxa Comum
-- F07 — Ameixa Amarela
-- F08 — Ameixa Amarela
-- F09 — Figo Branco
-- F10 — Limão Siciliano
-- F11 — Jabuticaba
-- F12 — Jabuticaba
-- F13 — Romã
-- F14 — Graviola
-- F15 — Cravo Louro
-- G01 — Café
-- G04 — Nogueira-Pecã
-- G05 — Nogueira-Pecã
-- G06 — Abacate Hass
-- G07 — Abacate Hass
-- G08 — Pera Abacaxi
-- G09 — Pera-d'água
-- G10 — Pera Pau
-- G11 — Jabuticaba
-- G13 — Campari
-- G14 — Campari
-- H01 — Ingá-feijão
-- H02 — Ingá-feijão
-- H03 — Ingá-feijão
-- H04 — Ingá-banana
-- H05 — Araçá-amarelo
-- H06 — Araçá-amarelo
-- H07 — Araçá-vermelho
-- H08 — Araçá-vermelho
-- H09 — Araçá-vermelho
-- H10 — Araçá-laranja
-- I03 — Ingá-de-metro
-- I07 — Pera Branca
-- I10 — Cipó-rabo-de-macaco
-- I19 — Kiwi
-- I20 — Kiwi
+## Critério de conclusão por espécie
+[ ] Identificação botânica confirmada
+[ ] Fotografia real, nítida e correspondente
+[ ] Arquivo abre no site publicado
+[ ] Autoria e licença/autorização registradas
+[ ] Legenda distingue imagem de referência de fotografia da muda local
 
-## Próxima etapa
-Selecionar e verificar manualmente, para cada nome de planta, fotografia de fruto, identificação botânica, URL estável, crédito e licença. Não marcar como concluída apenas por a busca retornar algum resultado.
+**Observação:** o painel `revisao-fotos.html` apresenta categorias automáticas úteis para triagem, mas seus indicadores não representam uma contagem de fotos visualmente aprovadas.
