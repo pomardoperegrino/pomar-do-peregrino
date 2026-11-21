@@ -1,290 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Conheça o Pomar do Peregrino da Acolhida Beija-Flor, no Caminho do Louvor em Ituporanga/SC. Explore o mapa interativo e as fichas das plantas.">
-  <meta name="theme-color" content="#285b38">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Pomar do Peregrino | Acolhida Beija-Flor">
-  <meta property="og:description" content="Um espaço de acolhimento, natureza e educação ambiental no Caminho do Louvor. Explore o mapa e conheça cada árvore.">
-  <meta property="og:url" content="https://pomardoperegrino.github.io/pomar-do-peregrino/">
-  <title>Pomar do Peregrino | Acolhida Beija-Flor</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f8f0;
-      color: #29452e;
-      line-height: 1.6;
-    }
-    header {
-      background: #285b38;
-      color: white;
-      text-align: center;
-      padding: 58px 20px;
-      min-height: 430px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-    }
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background: linear-gradient(rgba(20,65,38,.60),rgba(20,65,38,.70)), url("nova%20foto%20aerea.jpeg") center 53% / cover no-repeat;
-    }
-    header h1 { margin-bottom: 8px; }
-    main {
-      max-width: 950px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px #00000012;
-    }
-    h2 { color: #327447; }
-    .botao {
-      display: inline-block;
-      background: #327447;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #285b38;
-      color: white;
-    }
-.hero-photo{margin:0 auto 22px;max-width:950px;border-radius:18px;overflow:hidden;background:linear-gradient(145deg,#164e32,#39794b);box-shadow:0 10px 30px #14392325;position:relative}.hero-photo img[hidden]{display:none!important}.hero-photo .photo-fallback[hidden]{display:none!important}.hero-photo img{display:block;width:100%;height:auto;max-height:650px;object-fit:contain}.hero-photo .photo-fallback{padding:40px 22px;text-align:center;color:white}.hero-photo .photo-fallback h2{color:white;font-size:clamp(1.6rem,4vw,2.6rem);margin:0 0 10px}.hero-photo .photo-fallback p{margin:6px auto;max-width:650px}.hero-photo figcaption{padding:10px 16px;text-align:center;background:#e5eee0;color:#31533a;font-size:.88rem}.hero-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}.hero-cta a{padding:12px 18px;border-radius:9px;text-decoration:none;font-weight:bold;background:white;color:#1c5133}.hero-cta a.secondary{background:#d8e8ce;color:#1c5133}a:focus-visible,button:focus-visible{outline:3px solid #efc469;outline-offset:3px}@media(max-width:600px){main{padding:18px 12px}.hero-photo{border-radius:12px}.hero-photo .photo-fallback{padding:30px 14px}}
-.site-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding:12px;background:#1d462e}.site-nav a{color:white;text-decoration:none;padding:9px 13px;border-radius:8px;font-weight:600}.site-nav a:hover,.site-nav a:focus-visible{background:#397b4c}.quick-search{background:linear-gradient(135deg,#e8f3e3,#fff);border:1px solid #d1e2cb}.quick-search form{display:flex;gap:9px;flex-wrap:wrap}.quick-search input{flex:1 1 190px;min-width:0;padding:13px;border:1px solid #a9c5a6;border-radius:9px;font:inherit}.quick-search button{background:#285b38;color:white;border:0;border-radius:9px;padding:12px 18px;font:inherit;font-weight:bold;cursor:pointer}.quick-search .hint{font-size:.9rem;color:#506d57;margin-bottom:0}.action-links{display:flex;gap:10px;flex-wrap:wrap}.action-links a{flex:1 1 180px;text-align:center}.skip-link{position:absolute;left:-9999px;top:0;background:white;color:#285b38;padding:10px;z-index:100}.skip-link:focus{left:10px}.visitor-counter{border:1px solid #c8ddc3;background:#edf6e9;text-align:center}.visitor-counter strong{font-size:1.5rem;color:#20563b}.visitor-counter p{margin:7px 0}.mini-stats{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.mini-stats span{background:#eaf3e5;border-radius:12px;padding:9px 14px;font-size:.9rem}.mini-stats strong{color:#20563b}@media(max-width:600px){header{padding:32px 16px;min-height:300px}header::before{background-size:cover;background-position:center 58%}.site-nav{gap:2px;padding:8px}.site-nav a{font-size:.88rem;padding:8px}.quick-search button{width:100%}}
-  .visitor-start{background:#fff;border:1px solid #cddfc7;border-radius:14px;padding:17px;margin-bottom:15px}.visitor-start h2{margin:0 0 5px;font-size:1.25rem}.visitor-start p{margin:0 0 12px}.visitor-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.visitor-actions a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;border-radius:10px;background:#e7f2e2;color:#20563b;font-weight:700;text-decoration:none;padding:10px}.visitor-actions a.primary{background:#285b38;color:white}@media(max-width:600px){.site-nav{gap:4px;padding:8px 5px}.site-nav a{padding:8px 7px;font-size:.83rem}.visitor-start{padding:14px}.visitor-actions a{font-size:.9rem}.quick-search h2{font-size:1.28rem}} 
-/* Acesso rápido pensado para uso com uma mão no celular */
-.mobile-shortcuts{display:none}@media(max-width:650px){.mobile-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:sticky;bottom:0;z-index:30;background:#fff;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));box-shadow:0 -4px 18px #173d292b;gap:8px}.mobile-shortcuts a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:54px;background:#e7f2e2;border-radius:10px;color:#174e31;text-decoration:none;font-size:.84rem;font-weight:700;text-align:center}.mobile-shortcuts a:focus-visible{outline:3px solid #e7a93b}body{padding-bottom:0}.quick-search input{font-size:16px}.visitor-actions a{min-height:56px}}
-.name-results{display:grid;gap:7px;margin-top:10px}.name-results a{display:flex;justify-content:space-between;gap:8px;padding:11px 12px;border:1px solid #d1e2cb;border-radius:9px;background:#fff;color:#20563b;text-decoration:none;min-height:48px}.name-results a span{font-weight:700}.name-results a small{color:#506d57}.name-results[hidden]{display:none!important}
-/* Foto aérea: preservar amplitude do terreno em telas grandes e celulares */
-header::before{background-image:linear-gradient(rgba(12,48,28,.42),rgba(12,48,28,.52)),url("nova%20foto%20aerea.jpeg");background-position:center 53%;background-size:cover}
-@media(min-width:900px){header{min-height:480px}header::before{background-position:center 50%}}
-@media(max-width:600px){header{min-height:320px}header::before{background-position:center 50%}}
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Conheça o Pomar do Peregrino da Acolhida Beija-Flor, no Caminho do Louvor, em Ituporanga/SC. Encontre árvores, doadores e histórias.">
+<meta name="theme-color" content="#285b38">
+<meta property="og:type" content="website"><meta property="og:title" content="Pomar do Peregrino | Acolhida Beija-Flor">
+<meta property="og:description" content="Um lugar de acolhimento, natureza e histórias. Explore o pomar e conheça suas árvores.">
+<meta property="og:url" content="https://pomardoperegrino.github.io/pomar-do-peregrino/">
+<title>Pomar do Peregrino | Acolhida Beija-Flor</title>
+<style>
+:root{--verde:#285b38;--escuro:#21452e;--claro:#edf5e9;--borda:#d3e3cd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f6f8f3;color:var(--escuro);font:16px/1.65 system-ui,-apple-system,Arial,sans-serif}
+a{color:#1c6139}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #e5b34d;outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:0;background:white;padding:10px;z-index:20}.skip:focus{left:10px}
+.hero{min-height:350px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;padding:65px 20px;background:linear-gradient(#153d28a8,#153d28ba),url("nova%20foto%20aerea.jpeg") center 53%/cover}
+.hero h1{font-size:clamp(2rem,6vw,3.7rem);line-height:1.15;margin:0 0 12px}.hero p{margin:3px 0;font-size:clamp(1rem,2.4vw,1.2rem)}.hero .tagline{margin-top:15px;max-width:620px}
+nav.top{background:#1d462e;display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:10px}nav.top a{color:white;text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}nav.top a:hover{background:#397b4c}
+main{max-width:960px;margin:auto;padding:25px 16px 50px}.card{background:white;border:1px solid #e2eadf;border-radius:16px;padding:clamp(19px,4vw,30px);margin:0 0 20px;box-shadow:0 3px 13px #163a2410}h2{font-size:clamp(1.35rem,3vw,1.7rem);line-height:1.3;margin:0 0 12px;color:var(--verde)}p{margin:9px 0 14px}.muted{font-size:.89rem;color:#526d57}.date{background:var(--claro);text-align:center;padding:12px 15px;font-size:.95rem}
+.search{background:linear-gradient(130deg,#eaf4e6,#fff)}.search form{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.search input{flex:1 1 230px;min-width:0;padding:13px;border:1px solid #9fbda0;border-radius:9px;font:inherit;font-size:16px}.btn,.search button{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:48px;border:0;border-radius:10px;background:var(--verde);color:white;text-decoration:none;font:inherit;font-weight:700;padding:11px 18px;cursor:pointer}.btn.secondary{background:#e4f0df;color:var(--escuro)}
+.results{display:grid;gap:7px;margin-top:12px}.results[hidden]{display:none}.results a{display:flex;justify-content:space-between;gap:10px;background:white;border:1px solid var(--borda);padding:11px;border-radius:9px;text-decoration:none}.results small{color:#526d57}
+.explore{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.explore a{display:flex;flex-direction:column;gap:5px;padding:18px 14px;background:#edf5e9;border:1px solid var(--borda);border-radius:12px;text-decoration:none;min-height:130px}.explore strong{font-size:1.05rem}.explore span{font-size:.9rem;color:#4c6752}
+.story-photo{display:block;width:100%;height:auto;border-radius:12px;margin:17px 0 9px}.story-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}.story-gallery img{width:100%;height:190px;object-fit:cover;border-radius:10px}.story-gallery figure{margin:0}.story-gallery figcaption{font-size:.83rem;color:#526d57}
+.share{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.share button{background:white;color:var(--verde);border:1px solid var(--verde);padding:11px 16px;border-radius:10px;min-height:48px;font:inherit;cursor:pointer}
+.counter{font-size:.9rem;color:#526d57;margin-top:15px}.counter strong{color:var(--verde)}
+footer{background:#285b38;color:white;text-align:center;padding:24px 16px}
+@media(max-width:650px){.hero{min-height:290px;padding:45px 16px}.explore{grid-template-columns:1fr}.explore a{min-height:0}.story-gallery img{height:145px}nav.top{gap:2px}nav.top a{font-size:.9rem;padding:7px 9px}.search button{width:100%}}
+@media(max-width:420px){.story-gallery{grid-template-columns:1fr}.story-gallery img{height:auto}}
 </style>
 </head>
 <body>
-  <a class="skip-link" href="#conteudo">Ir ao conteúdo principal</a>
-  <header>
-    <h1>🌳 Pomar do Peregrino</h1>
-    <p>Acolhida Beija-Flor | Caminho do Louvor</p>
-    <p>Ituporanga – Santa Catarina</p>
-  </header>
-  <div id="data-plantio-destaque" style="background:#e9f3df;color:#24452d;text-align:center;padding:16px 12px;border-bottom:2px solid #a8c9a0;font-size:clamp(1rem,2.6vw,1.18rem);line-height:1.5"><strong>🌱 Plantio realizado de 6 a 10 de outubro de 2026</strong><div style="font-size:.9em">Um marco na história do Pomar do Peregrino</div></div>
-  <nav class="site-nav" aria-label="Navegação principal">
-    <a href="#inicio">Início</a><a href="passeio-virtual.html">🚶 Passeio virtual</a><a href="croqui-digital.html">🌳 Croqui completo</a><a href="mapa-interativo.html">🗺️ Mapa</a><a href="catalogo.html">🌿 Catálogo</a><a href="#acolhida">Acolhida</a><a href="https://www.instagram.com/acolhidabeijaflor/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-  </nav>
-  <main id="conteudo"><section class="visitor-start" aria-label="Acesso rápido para peregrinos"><h2>🌿 Explore o pomar pelo celular</h2><p>Escolha como deseja conhecer nossas árvores.</p><div class="visitor-actions"><a class="primary" href="croqui-digital.html">🌳 Encontrar uma árvore</a><a href="mapa-interativo.html">🗺️ Ver o mapa</a><a href="passeio-virtual.html">🚶 Passeio virtual</a><a href="catalogo.html">📖 Conhecer espécies</a></div></section>
-    <section class="card quick-search" id="inicio" aria-labelledby="encontre-arvore">
-<h2 id="encontre-arvore">🔎 Encontre uma árvore pelo nome ou código</h2>
-<p>Digite o nome da planta (por exemplo, <strong>uvaia</strong>) ou o código da placa (por exemplo, <strong>D16</strong>).</p>
-<form id="search-code-form" role="search">
-<label for="tree-code-input" style="display:block;width:100%;font-weight:bold">Nome da planta ou código</label>
-<input id="tree-code-input" name="busca" type="search" aria-label="Nome da planta ou código da árvore" aria-controls="plant-name-results" placeholder="Ex.: uvaia, pitanga ou D16" autocomplete="off" required style="font-size:16px">
-<button type="submit">🔎 Buscar planta</button>
-</form>
-<p id="search-code-feedback" role="status" aria-live="polite"></p>
-<div id="plant-name-results" class="name-results" role="region" aria-label="Plantas encontradas" aria-live="polite" hidden></div>
-<p class="hint">Toque no resultado para abrir a ficha e conferir a posição no pomar. <a href="mapa-interativo.html">Ver mapa interativo</a>.</p>
-<div class="mini-stats"><span><strong>128</strong> posições no croqui</span><span><strong>Busca</strong> por nome ou código</span><span><strong>Fichas individuais</strong> de consulta</span></div>
+<a class="skip" href="#conteudo">Ir ao conteúdo principal</a>
+<header class="hero"><h1>🌳 Pomar do Peregrino</h1><p>Acolhida Beija-Flor • Caminho do Louvor</p><p>Ituporanga, Santa Catarina</p><p class="tagline">Cada árvore guarda uma história. Cada visita cultiva acolhimento, natureza e esperança.</p></header>
+<nav class="top" aria-label="Navegação principal"><a href="#buscar">Buscar árvore</a><a href="#explorar">Explorar o pomar</a><a href="#historia">Nossa história</a><a href="https://www.instagram.com/acolhidabeijaflor/" target="_blank" rel="noopener noreferrer">Instagram ↗</a></nav>
+<div class="date">🌱 Plantio realizado de <strong>6 a 10 de outubro de 2026</strong></div>
+<main id="conteudo">
+<section class="card search" id="buscar" aria-labelledby="busca-titulo"><h2 id="busca-titulo">🔎 Encontre uma árvore</h2><p>Pesquise pelo nome da planta ou pelo código da placa.</p>
+<form id="search-code-form" role="search"><label for="tree-code-input" class="skip">Nome da planta ou código</label><input id="tree-code-input" type="search" name="busca" placeholder="Ex.: pitanga, uvaia ou D16" aria-label="Nome da planta ou código" aria-controls="plant-name-results" autocomplete="off" required><button type="submit">Buscar</button></form>
+<p id="search-code-feedback" role="status" aria-live="polite"></p><div id="plant-name-results" class="results" aria-live="polite" aria-label="Resultados da busca" hidden></div>
+<p class="muted">O cadastro reúne <strong>128 posições</strong> no croqui de 05/11/2026. Identificações e dados de campo seguem em conferência.</p></section>
+<section class="card" id="explorar"><h2>🌿 Explore do seu jeito</h2><div class="explore">
+<a href="croqui-digital.html"><strong>🌳 Croqui digital</strong><span>Localize plantas e conheça seus doadores.</span></a>
+<a href="catalogo.html"><strong>📖 Catálogo botânico</strong><span>Descubra as espécies e consulte suas fichas.</span></a>
+<a href="passeio-virtual.html"><strong>🚶 Passeio virtual</strong><span>Conheça o projeto em uma visita digital guiada.</span></a>
+</div><p class="muted">Quer explorar outra representação do terreno? <a href="mapa-interativo.html">Abra o mapa interativo</a>.</p></section>
+<section class="card" id="historia"><h2>💚 Um pomar de histórias e gratidão</h2>
+<p>Na Acolhida Beija-Flor, o Pomar do Peregrino nasceu do desejo de unir fé, natureza e hospitalidade. Cada muda representa o carinho de quem contribuiu com o projeto e a esperança de oferecer frutos, sombra e aprendizado aos peregrinos.</p>
+<img class="story-photo" src="WhatsApp%20Image%202026-11-12%20at%2015.03.26.jpeg" alt="Vista aérea da Acolhida Beija-Flor e da paisagem rural" loading="lazy">
+<p class="muted">Acolhida Beija-Flor, no Caminho do Louvor.</p>
+<div class="story-gallery"><figure><img src="Aquisi%C3%A7%C3%A3o%20parte%20das%20mudas.jpeg" alt="Parte das mudas adquiridas para implantação do pomar" loading="lazy"><figcaption>Preparação e chegada de parte das mudas.</figcaption></figure><figure><img src="IMG_2073.jpg" alt="Terreno do pomar com mudas recém-plantadas" loading="lazy"><figcaption>O pomar começando a criar raízes.</figcaption></figure></div>
+<p class="muted">As fotografias registram etapas do projeto. O plantio individual e a identificação botânica das mudas devem ser confirmados no cadastro.</p></section>
+<section class="card" id="compartilhar"><h2>📲 Compartilhe essa história</h2><p>Ajude mais peregrinos e amigos a conhecer o Pomar do Peregrino.</p>
+<div class="share"><a class="btn" href="https://api.whatsapp.com/send?text=Conhe%C3%A7a%20o%20Pomar%20do%20Peregrino%20%F0%9F%8C%B3%20https%3A%2F%2Fpomardoperegrino.github.io%2Fpomar-do-peregrino%2F" target="_blank" rel="noopener noreferrer">Compartilhar no WhatsApp</a><button type="button" id="copy-site-link">Copiar link</button></div><p id="copy-feedback" role="status" aria-live="polite"></p>
+<p class="counter">👣 Visitas ao site: <strong id="total-visitas">Aguardando ativação</strong> <span id="visitas-info"></span></p>
 </section>
-<section class="card visitor-counter" aria-labelledby="visitas-titulo">
-      <h2 id="visitas-titulo">👣 Visitantes do nosso pomar digital</h2>
-      <p><strong id="total-visitas">Carregando visitas…</strong></p>
-      <p id="visitas-info">Consultando o total de visitas registradas pelo GoatCounter.</p>
-      <p><small>O contador mostrará visualizações registradas, não necessariamente pessoas diferentes. Não exibimos dados pessoais dos visitantes.</small></p>
-    </section>
-    <section class="card" id="chegada-mudas" aria-labelledby="chegada-mudas-titulo">
-      <h2 id="chegada-mudas-titulo">🌱 Nossa história — a chegada das mudas</h2>
-      <p>Antes de criar raízes no Pomar do Peregrino, as plantas passaram por uma etapa especial de preparação. Este registro mostra <strong>parte das mudas adquiridas</strong>, reunidas e identificadas para a implantação do projeto.</p>
-      <figure style="margin:18px 0 8px">
-        <img src="Aquisi%C3%A7%C3%A3o%20parte%20das%20mudas.jpeg" alt="Parte das mudas adquiridas para o Pomar do Peregrino, organizadas em caixas plásticas alaranjadas, com etiquetas de identificação, em uma área externa." loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px" />
-        <figcaption style="font-size:.93rem;color:#506d57;margin-top:10px"><strong>A chegada das mudas — o início de um sonho que criou raízes.</strong> Cada muda representa um gesto de cuidado com a natureza e a esperança de oferecer aos peregrinos frutos, sombra, aprendizado e acolhimento. <em>Registro de parte das mudas adquiridas; a imagem não identifica individualmente todas as espécies.</em></figcaption>
-      </figure>
-    </section>
-    <section class="card" id="croqui" style="background:linear-gradient(135deg,#e1f0dc,#fff);border:1px solid #c8ddc3">
-      <h2>🌳 Veja onde está cada planta — e quem a doou</h2>
-      <p>Explore o <strong>croqui digital completo</strong>, organizado pelas linhas e posições do terreno. Cada posição cadastrada apresenta o nome da planta e o doador registrado. Clique para conhecer a ficha individual.</p>
-      <p><a class="botao" href="croqui-digital.html">🗺️ Abrir croqui com plantas e doadores</a></p>
-      <p><small>Base: croqui de 05/11/2026. A grade é esquemática; registros e doadores sujeitos a conferência.</small></p>
-    </section>
-    <section class="card" style="background:linear-gradient(125deg,#e6f1df,#fff)">
-      <h2>🚶 Faça um passeio virtual</h2>
-      <p>Em cinco etapas, conheça a Acolhida Beija-Flor, explore o croqui, descubra árvores e aprenda a consultar suas fichas.</p>
-      <p><a class="botao" href="passeio-virtual.html">Começar passeio virtual</a></p>
-      <p><small>Experiência digital guiada; não representa trajetos físicos ou imagens em 360°.</small></p>
-    </section>
-    <figure class="hero-photo">
-      <img src="WhatsApp%20Image%202026-11-12%20at%2015.03.26.jpeg" alt="Fotografia aérea da Acolhida Beija-Flor, mostrando as edificações, os jardins e a paisagem rural ao redor." loading="eager" onerror="this.hidden=true;this.style.display='none';this.nextElementSibling.hidden=false">
-      <div class="photo-fallback" hidden>
-        <h2>🌿 Acolhida Beija-Flor</h2>
-        <p><strong>Pomar do Peregrino</strong> • Caminho do Louvor • Ituporanga/SC</p>
-        <p>Mais que hospedagem: um encontro de fé, acolhimento e gratidão.</p>
-        <div class="hero-cta"><a href="mapa-interativo.html">🗺️ Explorar o pomar</a><a class="secondary" href="catalogo.html">🌳 Conhecer as plantas</a></div>
-      </div>
-      <figcaption>Fotografia real da Acolhida Beija-Flor • Ituporanga/SC</figcaption>
-    </figure>
-    <section class="card" id="identidade-visual" style="text-align:center">
-      <h2>💚 Conheça a Acolhida Beija-Flor e o Pomar do Peregrino</h2>
-      <p>Um projeto que une hospitalidade, fé, natureza e a generosidade de quem contribui com novas árvores.</p>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;align-items:center">
-        <figure style="margin:0;flex:1 1 230px;max-width:360px">
-          <img src="65ACC4D7-7D46-460C-9F4E-5791CF0C386F.png" alt="Arte ilustrativa de divulgação do projeto Pomar do Peregrino, com espécies frutíferas e informações sobre a Acolhida Beija-Flor" loading="lazy" style="width:100%;height:auto;border-radius:12px" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-          <figcaption hidden>Arte do projeto em preparação.</figcaption>
-          <figcaption>Arte ilustrativa do projeto</figcaption>
-        </figure>
-        <figure style="margin:0;flex:1 1 230px;max-width:360px">
-          <img src="4798967D-CF14-4EA8-A5EB-AF24A090A8A7%20(1).png" alt="Logotipo circular da Acolhida Beija-Flor, com dois beija-flores e paisagem natural" loading="lazy" style="width:100%;height:auto;border-radius:12px" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
-          <figcaption hidden>Logotipo em preparação.</figcaption>
-          <figcaption>Identidade visual da Acolhida Beija-Flor</figcaption>
-        </figure>
-      </div>
-    </section>
-    <section class="card"><h2>🗺️ Mapa Interativo do Pomar</h2><p>Encontre qualquer uma das 128 posições do croqui pelo código, nome da planta ou doador. Toque na árvore para consultar suas informações.</p><p><a class="botao" href="mapa-interativo.html" style="display:inline-block;background:#285b38;color:white;text-decoration:none;padding:12px 18px;border-radius:9px">Explorar mapa interativo</a></p><p><small>Mapa esquemático por linhas; as posições exatas no terreno ainda serão representadas.</small></p></section>
-<section class="card" id="acolhida">
-      <h2>Bem-vindo ao nosso pomar!</h2>
-      <p>
-        Aqui, cada árvore representa um gesto de amor
-        à natureza, de generosidade, fé e esperança.
-      </p>
-      <p>
-        Um espaço de acolhimento, aprendizado e
-        conexão com a vida, onde os peregrinos
-        podem descansar e conhecer a natureza.
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>🌿 Catálogo Botânico Digital</h2>
-      <p>
-        O croqui atualizado em 5 de novembro de 2026 reúne
-        128 registros de localização de plantas. O catálogo
-        será ampliado e revisado conforme a identificação
-        e a situação de cada muda forem confirmadas.
-      </p>
-      <p>As fichas individuais já permitem consultar os registros. Informações botânicas, fotografias verificadas e dados de floração e frutificação serão acrescentados gradualmente.</p>
-    </section>
-
-    <section class="card">
-      <h2>💚 Um legado de generosidade</h2>
-      <p>
-        Cada árvore também representa o carinho
-        de pessoas, famílias e empresas que
-        contribuíram para tornar este sonho realidade.
-      </p>
-      <p>
-        Pequenos gestos de hoje podem deixar
-        grandes frutos para as futuras gerações.
-      </p>
-    </section>
-    <section class="card" style="text-align:center;">
-  <h2>🍊 Conheça nossas árvores</h2>
-  <p><a class="botao" href="catalogo.html">🌿 Abrir o Catálogo Botânico Digital</a></p>
-  <p>Descubra as espécies que fazem parte do Pomar do Peregrino.</p>
-  <a href="laranjeira.html" style="display:inline-block; background:#285b38; color:white; padding:14px 24px; border-radius:10px; text-decoration:none; font-weight:bold;">
-    🍊 Conheça a Laranjeira
-  </a>
-</section>
-    <section class="card" id="marco-plantio">
-  <h2>🌱 O nascimento do Pomar do Peregrino</h2>
-  <p>Entre os dias <strong>6 e 10 de outubro de 2026</strong>, um sonho começou a ganhar raízes na Acolhida Beija-Flor. Com o preparo do solo, a abertura e preparação das covas, a adubação e o plantio das mudas, nasceu um espaço pensado para acolher, ensinar e aproximar as pessoas da natureza.</p>
-  <p>Cada pequena árvore representa um compromisso com o futuro. Com o passar dos anos, o pomar poderá oferecer frutos, sombra, beleza e novas experiências aos peregrinos que percorrem o Caminho do Louvor.</p>
-  <p>Mais do que plantar árvores, estamos cultivando histórias, conhecimento e esperança.</p>
-  <div id="galeria-implantacao" style="display:none;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0;">
-    <figure style="margin:0"><img src="IMG_2071.jpg" alt="Muda jovem do Pomar do Peregrino apoiada por tutor de bambu em terreno inclinado" loading="lazy" style="width:100%;height:250px;object-fit:cover;border-radius:12px"><figcaption style="font-size:.9em;margin-top:7px">🌿 Uma das mudas na fase inicial de implantação.</figcaption></figure>
-    <figure style="margin:0"><img src="IMG_2073.jpg" alt="Vista panorâmica da encosta com mudas recém-plantadas e tutores de bambu na Acolhida Beija-Flor" loading="lazy" style="width:100%;height:250px;object-fit:cover;border-radius:12px"><figcaption style="font-size:.9em;margin-top:7px">🌄 Vista geral do terreno e da distribuição das mudas.</figcaption></figure>
-  </div>
-  <script>
-  (function(){var fotos=['IMG_2071.jpg','IMG_2073.jpg'];Promise.all(fotos.map(function(src){return new Promise(function(resolve){var img=new Image();img.onload=function(){resolve(true)};img.onerror=function(){resolve(false)};img.src=src})})).then(function(ok){if(ok.every(Boolean)){document.getElementById('galeria-implantacao').style.display='grid'}})})();
-  </script>
-  <p><small>As fotografias documentam o pomar com as mudas já plantadas. O dia exato de plantio de cada muda, dentro do período indicado, não foi registrado individualmente.</small></p>
-</section><section class="card" id="como-explorar">
-  <h2>🌿 Como explorar o Pomar do Peregrino</h2>
-  <p>Conheça as frutíferas e descubra as histórias de cada muda em três passos simples:</p>
-  <ol style="line-height:1.9;padding-left:1.5rem">
-    <li><strong>Encontre uma árvore</strong> no <a href="croqui-digital.html">croqui digital</a> ou no <a href="catalogo.html">catálogo botânico</a>.</li>
-    <li><strong>Abra a ficha individual</strong> para conhecer o nome registrado, o doador e a posição no pomar.</li>
-    <li><strong>Explore outras espécies</strong> usando os links para a árvore anterior e a próxima árvore.</li>
-  </ol>
-  <p><small>As mudas foram plantadas de 6 a 10 de outubro de 2026. A identificação botânica e as fotografias de referência seguem em conferência.</small></p>
-</section>
-    <section class="card" id="qualidade-fotografias">
-  <h2>📸 Qualidade das fotografias do pomar</h2>
-  <p>Estamos conferindo as imagens dos frutos, uma planta de cada vez. O painel de revisão permite consultar os registros por código ou nome e acompanhar quais fotografias precisam de confirmação.</p>
-  <p><a class="botao" href="revisao-fotos.html">🔎 Consultar a revisão das fotografias</a></p>
-  <p><small>As fotografias são referências botânicas. Plantio realizado de 6 a 10 de outubro de 2026; a identificação botânica e as fotografias de referência seguem em conferência.</small></p>
-</section>
-    <section class="card" id="compartilhar" style="text-align:center">
-      <h2>📲 Compartilhe o Pomar do Peregrino</h2>
-      <p>Convide familiares, amigos e peregrinos a conhecer o pomar, suas árvores e suas histórias.</p>
-      <p><a href="https://api.whatsapp.com/send?text=Conhe%C3%A7a%20o%20Pomar%20do%20Peregrino%20%F0%9F%8C%B3%20https%3A%2F%2Fpomardoperegrino.github.io%2Fpomar-do-peregrino%2F" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#285b38;color:white;padding:12px 18px;border-radius:9px;text-decoration:none">Compartilhar pelo WhatsApp</a></p>
-      <p><button type="button" id="copy-site-link" style="padding:12px 18px;border:1px solid #285b38;border-radius:9px;background:white;color:#285b38;cursor:pointer;font:inherit">Copiar endereço do pomar</button></p>
-      <p id="copy-feedback" role="status" aria-live="polite"></p>
-      <p><a class="botao" href="https://www.instagram.com/acolhidabeijaflor/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram da Acolhida Beija-Flor">📷 Instagram da Acolhida Beija-Flor</a></p>
-      <p><small>Perfil: <strong>@acolhidabeijaflor</strong>. No Instagram, adicione o endereço do pomar em <strong>Editar perfil → Links → Adicionar link externo</strong>.</small></p>
-    </section>
-  </main>
-
-  <nav class="mobile-shortcuts" aria-label="Atalhos rápidos para peregrinos"><a href="#inicio">🔎<span>Buscar</span></a><a href="croqui-digital.html">🌳<span>Localizar</span></a><a href="mapa-interativo.html">🗺️<span>Mapa</span></a></nav>
-  <footer>
-    Pomar do Peregrino – Acolhida Beija-Flor
-    <p>Um lugar para acolher, aprender e preservar.</p>
-  </footer>
+</main>
+<footer><strong>Pomar do Peregrino – Acolhida Beija-Flor</strong><p>Um lugar para acolher, aprender e preservar.</p></footer>
 <script src="dados-plantas.js"></script>
 <script>
 (function(){
- const form=document.getElementById('search-code-form');
- const input=document.getElementById('tree-code-input');
- const feedback=document.getElementById('search-code-feedback');
- const results=document.getElementById('plant-name-results');
- const plants=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
- const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
- function render(){
-  const q=normalize(input.value.trim());results.replaceChildren();feedback.textContent='';
-  if(!q){results.hidden=true;return [];}
-  const matches=plants.filter(p=>normalize(p.nome).includes(q)||normalize(p.codigo).includes(q));
-  results.hidden=false;
-  if(!matches.length){const p=document.createElement('p');p.textContent='Nenhuma planta encontrada. Confira o nome ou código.';results.append(p);return [];}
-  const visible=matches.slice(0,25);
-  for(const plant of visible){const a=document.createElement('a');a.href='ficha-individual.html?codigo='+encodeURIComponent(plant.codigo);const name=document.createElement('span');name.textContent=plant.nome;const code=document.createElement('small');code.textContent='Posição '+plant.codigo;a.append(name,code);results.append(a);}
-  if(matches.length>visible.length){const p=document.createElement('p');p.textContent='Mostrando os primeiros 25 resultados. Digite mais letras para refinar.';results.append(p);}
-  return matches;
- }
- input.addEventListener('input',render);
- form.addEventListener('submit',event=>{
-  event.preventDefault();
-  const q=normalize(input.value.trim());
-  if(!q){feedback.textContent='Digite o nome ou o código de uma planta.';return;}
-  const exact=plants.find(p=>normalize(p.codigo)===q);
-  if(exact){location.href='ficha-individual.html?codigo='+encodeURIComponent(exact.codigo);return;}
-  const matches=render();
-  if(matches.length===1){location.href='ficha-individual.html?codigo='+encodeURIComponent(matches[0].codigo);return;}
-  if(matches.length>1){feedback.textContent='Encontramos '+matches.length+' posições. Toque na planta desejada abaixo.';}
- });
+const form=document.getElementById('search-code-form'),input=document.getElementById('tree-code-input'),feedback=document.getElementById('search-code-feedback'),results=document.getElementById('plant-name-results');
+const plants=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
+const normalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+function render(){const q=normalize(input.value.trim());results.replaceChildren();feedback.textContent='';if(!q){results.hidden=true;return [];}
+const matches=plants.filter(p=>normalize(p.nome).includes(q)||normalize(p.codigo).includes(q));results.hidden=false;
+if(!matches.length){const p=document.createElement('p');p.textContent='Nenhuma planta encontrada. Confira o nome ou código.';results.append(p);return [];}
+for(const plant of matches.slice(0,25)){const a=document.createElement('a');a.href='ficha-individual.html?codigo='+encodeURIComponent(plant.codigo);const name=document.createElement('strong');name.textContent=plant.nome;const code=document.createElement('small');code.textContent='Posição '+plant.codigo;a.append(name,code);results.append(a);}
+if(matches.length>25){const p=document.createElement('p');p.textContent='Mostrando os primeiros 25 resultados. Refine a busca.';results.append(p);}return matches;}
+input.addEventListener('input',render);form.addEventListener('submit',e=>{e.preventDefault();const q=normalize(input.value.trim());if(!q)return;const exact=plants.find(p=>normalize(p.codigo)===q);if(exact){location.href='ficha-individual.html?codigo='+encodeURIComponent(exact.codigo);return;}const matches=render();if(matches.length===1){location.href='ficha-individual.html?codigo='+encodeURIComponent(matches[0].codigo);}else if(matches.length>1){feedback.textContent='Encontramos '+matches.length+' posições. Escolha uma abaixo.';}});
+document.getElementById('copy-site-link').addEventListener('click',async()=>{const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado!';}catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url;}});
 })();
-document.getElementById('copy-site-link').addEventListener('click',async()=>{
- const url='https://pomardoperegrino.github.io/pomar-do-peregrino/';
- try{await navigator.clipboard.writeText(url);document.getElementById('copy-feedback').textContent='Link copiado! Cole na bio do Instagram ou envie aos amigos.'}
- catch(e){document.getElementById('copy-feedback').textContent='Copie este endereço: '+url}
-});
-</script>
-<script src="estatisticas.js?v=20261112-2" defer></script>
-</body>
-</html>
+</script><script src="estatisticas.js?v=20261112-2" defer></script>
+</body></html>
