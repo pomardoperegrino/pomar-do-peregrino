@@ -1,39 +1,48 @@
-# Auditoria de imagens — Pomar do Peregrino
-Atualização: 21/11/2026. Base: código do repositório GitHub. **Esta é uma auditoria documental e de referências, não uma aprovação visual das fotografias.**
+# Auditoria geral das referências botânicas — Pomar do Peregrino
+Data: 21/11/2026. Fonte: arquivos `dados-plantas.js` e `ficha-individual.html` do repositório. **Auditoria estática do código; não representa verificação visual, teste de disponibilidade das URLs ou confirmação da espécie de cada muda.**
 
-## O que existe
-- 128 posições cadastradas no índice `dados-plantas.js`, referentes ao croqui de 05/11/2026; não equivalem à confirmação individual do plantio.
-- 35 posições possuem referência fotográfica explícita no objeto `photoReferences` de `ficha-individual.html`. Muitas posições compartilham a mesma imagem da espécie ou grupo; 35 **não** significa 35 fotos distintas.
-- O código também possui tratamentos específicos para arquivos locais de **cabeludinha** (`cabeludinha.png`), **ingá-anão** (`inga anão.png`) e **pêssego** (`pessego.jpeg`), utilizados em múltiplas posições. Os arquivos constam no repositório.
-- Para outras plantas, há tentativa de pesquisa automática no Wikimedia Commons. Esse mecanismo **não** comprova que a imagem será encontrada, carregará ou corresponderá à cultivar.
-- Certos nomes ambíguos têm a busca automática bloqueada para evitar atribuições erradas.
-- As fotografias do terreno e da aquisição de mudas documentam o projeto, mas não substituem fotografias botânicas identificadas.
+## Critério educativo aprovado
+> **Imagem de referência botânica:** utilizada para auxiliar na identificação da planta. Pode apresentar diferenças em relação ao exemplar cultivado no Pomar do Peregrino.
 
-## Melhorias aplicadas nesta revisão
-- Em `ficha-individual.html`, a imagem do ingá-anão passa a usar o arquivo relativo local como fonte principal, evitando dependência do endereço `raw.githubusercontent.com`.
-- Esta auditoria foi atualizada para reconhecer as referências adicionadas ao código depois do relatório de 12/11/2026.
+A legenda foi inserida na ficha individual e aparece quando a imagem é carregada. Fotografias do pomar não são obrigatórias; podem ser usadas fotografias ou ilustrações botânicas confiáveis, com créditos/licenças.
 
-## Pontos de atenção
-1. **Não marcar fotos como verificadas apenas porque há URL ou arquivo no código.** Conferir visualmente fruto, folhas, legenda e correspondência com a espécie.
-2. Verificar nome científico e cultivar com registro do viveiro, etiqueta ou profissional habilitado, sobretudo para cortiça-crespa/lisa, guabirobas, ingás, fisális, campari, ameixinha-amarela, cravo-louro e espécies não identificadas.
-3. Para imagens do Wikimedia Commons, conferir na página original o arquivo, a autoria, a licença vigente e as exigências de atribuição.
-4. Para imagens recebidas por mensagem, registrar autoria e autorização de publicação antes de considerar definitivas.
-5. Priorizar fotos nítidas do **fruto**, preferencialmente ainda na planta, com enquadramento adequado para celular e texto alternativo descritivo.
-6. Fotos de referência de uma espécie não comprovam a identidade da muda plantada nem a cultivar comercial.
-7. Confirmar o carregamento das imagens no site publicado em celular e computador; testes de código não substituem esse teste.
+## Inventário
+- **128** posições cadastradas; **73** nomes distintos de plantas no índice.
+- **36** códigos com referência individual explícita no objeto `photoReferences`, abrangendo até **20** nomes de plantas; **20** arquivos de imagem distintos citados nesse objeto.
+- Existem também arquivos locais, referências por regras de espécie/grupo e pesquisas automáticas no Wikimedia Commons.
+- **Não é possível afirmar que todas as 128 posições exibem uma imagem válida** sem testar as páginas publicadas e conferir a correspondência botânica.
 
-## Ordem sugerida de trabalho
-- **Etapa 1:** confirmar os arquivos locais de cabeludinha, ingá-anão e pêssego e verificar suas autorizações.
-- **Etapa 2:** conferir visualmente as 35 referências explícitas, agrupando por espécie para não repetir trabalho.
-- **Etapa 3:** substituir gradualmente buscas automáticas por imagens fixas, verificadas, com crédito e licença.
-- **Etapa 4:** completar as espécies sem fotografia confiável, sem usar imagens incorretas apenas para preencher espaços.
-- **Etapa 5:** validar as fichas e QR Codes em celular antes de imprimir placas.
+## Triagem por nome (73 nomes; grupos mutuamente exclusivos para organizar o trabalho)
+A classificação abaixo é uma **triagem de mecanismos presentes no código**, não uma aprovação das imagens. Quando mais de um mecanismo existe, a categoria indica a primeira via relevante, mas há regras que podem prevalecer sobre outras.
 
-## Critério de conclusão por espécie
-[ ] Identificação botânica confirmada
-[ ] Fotografia real, nítida e correspondente
-[ ] Arquivo abre no site publicado
-[ ] Autoria e licença/autorização registradas
-[ ] Legenda distingue imagem de referência de fotografia da muda local
+| Categoria | Nomes | Espécies ou nomes cadastrados |
+|---|---:|---|
+| Referência explícita por código | 20 | Araçá-laranja; Araçá-vermelho; Caqui Fuyu; Caqui Kioto (Chocolate); Cerejeira-do-rio-grande; Cortiça Crespa; Erva-mate; Fisális; Fortunella Xim Xim; Grumixama; Guabiju; Guaçatonga; Ingá-chinelo; Laranja Champagne; Maçã Eva; Mirtilo; Pitanga; Tangerina Ponkan; Tangerina Satsuma Okitsu; Uvaia |
+| Arquivo local | 5 | Cabeludinha; Ingá-anão; Pêssego Comum; Pêssego Douradão; Pêssego Ouro Mel |
+| Referência por espécie/grupo ou variedade | 7 | Guabiroba Crespa; Guabiroba-do-campo; Laranja Sanguínea; Laranja Umbigo; Laranja Valência; Pêssego Delicioso; Pêssego Premier |
+| Busca automática ou outra tentativa sem referência fixa garantida | 28 | Abacate Hass; Ameixa Amarela; Ameixa Coração de Boi; Ameixa Roxa Comum; Café; Figo Branco; Figo Roxo de Valinhos; Framboesa; Goiaba Amarela; Goiaba Vermelha; Graviola; Kiwi; Laranja Açúcar; Laranja Folha Murcha; Laranja Lima; Lichia; Limão Siciliano; Limão Tahiti; Maçã Julieta; Mamão; Nogueira-Pecã; Pera Abacaxi; Pera Branca; Pera Pau; Pera-d'água; Romã; Tangerina Mexerica; Tangerina Montenegrina |
+| Sem busca automática segura, sem referência fixa na triagem | 13 | Ameixinha Amarela; Amora Portuguesa; Araçá-amarelo; Baga de Macaco; Campari; Cipó-rabo-de-macaco; Cortiça Lisa; Cravo Louro; Falta identificar; Ingá-banana; Ingá-de-metro; Ingá-feijão; Jabuticaba |
 
-**Observação:** o painel `revisao-fotos.html` apresenta categorias automáticas úteis para triagem, mas seus indicadores não representam uma contagem de fotos visualmente aprovadas.
+**Atenção:** nomes com referência explícita podem ter outros códigos da mesma planta sem imagem individual; alguns tratamentos do código, como os de laranjas e pêssegos, priorizam regras de grupo em vez da referência por código. Guabirobas usam imagem comparativa de outra identificação e não devem ser apresentadas como prova da espécie da muda. Para ingá-anão e cabeludinha, confirmar autoria e permissão de publicação dos arquivos locais.
+
+## Pendências de validação
+1. Testar cada uma das 128 URLs de ficha, a imagem exibida, seu texto alternativo, a legenda e o retorno ao croqui em celular e computador.
+2. Conferir as imagens fixas no Wikimedia Commons: arquivo, identificação, autoria, licença e eventual exigência de atribuição.
+3. Conferir os arquivos locais `cabeludinha.png`, `inga anão.png` e `pessego.jpeg` e suas autorizações.
+4. Para os 28 nomes com busca automática, substituir gradualmente resultados variáveis por referências selecionadas e documentadas.
+5. Para os 13 nomes sem referência fixa na triagem, obter identificação segura antes de associar uma imagem. `Falta identificar` deve permanecer sem identificação especulativa.
+6. Confirmar diferenças entre espécie, grupo e cultivar, especialmente citros, pêssegos, guabirobas, cortiças e ingás.
+
+## Experiência do peregrino
+- As fichas têm nome, código, doador, localização no croqui e navegação entre posições.
+- A legenda educativa é apresentada apenas quando uma imagem carregou; na ausência dela, há uma mensagem de referência visual em preparação.
+- Há ajustes de tela pequena e imagens dimensionadas, mas **a legibilidade, o enquadramento e o tempo de carregamento ainda exigem teste em dispositivos reais**.
+- O site não deve apresentar uma imagem errada apenas para preencher a ficha.
+
+## Critério de aprovação por ficha
+- [ ] Nome/código/doador correspondem ao índice
+- [ ] Imagem carregou e ajuda a reconhecer a planta
+- [ ] Espécie ou grupo da imagem identificados com grau de certeza adequado
+- [ ] Fonte, autoria e licença ou autorização conferidas
+- [ ] Legenda educativa visível e texto alternativo adequado
+- [ ] Botões e croqui funcionam no celular
