@@ -14,5 +14,30 @@
 <p class="muted">Não inclua telefone, endereço ou dados pessoais sensíveis na mensagem. A autorização de fotografias e imagem pessoal é opcional e não impede o envio de uma avaliação. Ela não substitui autorizações específicas de terceiros, especialmente crianças. Os responsáveis poderão selecionar e aprovar as mensagens para publicação. O comentário não aparece automaticamente no site.</p>
 <p class="muted"><strong>Privacidade e direitos de imagem:</strong> O tratamento dos dados pessoais e a utilização dos textos e fotografias observarão a Lei nº 13.709/2018 (LGPD), a Lei nº 9.610/1998 (Direitos Autorais) e o artigo 20 do Código Civil Brasileiro, respeitando a finalidade autorizada e os direitos dos participantes.</p><button type="submit">💬 Enviar pelo WhatsApp</button><p id="envio-aviso" class="muted" role="status"></p></form></section>
 <section class="panel"><h2>🌸 Memórias que florescem</h2><div id="mensagens" class="entries" aria-live="polite"><p class="muted">Ainda não há mensagens publicadas. As primeiras lembranças aparecerão aqui após aprovação.</p></div></section></main><footer>Pomar do Peregrino • Acolhida Beija-Flor • Ituporanga, SC</footer>
-<script>document.getElementById('visita-form').addEventListener('submit',function(e){e.preventDefault();if(!this.reportValidity())return;const nome=document.getElementById('nome').value.trim(),cidade=document.getElementById('cidade').value.trim(),nota=document.getElementById('nota').value,mensagem=document.getElementById('mensagem').value.trim();if(!nome||!nota||!mensagem)return;const autorizaFotos=document.getElementById('foto-consentimento').checked;const texto=['Olá, Seu Pedro e Dona Vanderleia! 🌳','Gostaria de registrar minha visita à Acolhida Beija-Flor e ao Pomar do Peregrino.','','Nome: '+nome,'Cidade/estado: '+(cidade||'Não informado'),'Avaliação: '+('⭐'.repeat(Number(nota)))+' ('+nota+'/5)','Mensagem: '+mensagem,'','Autorizo gratuitamente a publicação do meu nome, cidade (se informada), avaliação e texto no Livro de Visitas, site e redes sociais da Acolhida Beija-Flor, para divulgar as experiências dos visitantes, após aprovação. Posso solicitar a retirada pelo WhatsApp.','Autorização de fotografias: '+(autorizaFotos?'SIM, para minha imagem em fotos feitas durante a visita pela equipe da Acolhida e para fotografias que eu enviar com os direitos necessários, exclusivamente no site do Pomar e nas redes sociais oficiais da Acolhida, com possibilidade de solicitar retirada pelo WhatsApp.':'NÃO.')].join('\n');document.getElementById('envio-aviso').textContent='O WhatsApp será aberto. Confira a mensagem e toque em enviar para concluir.';window.open('https://wa.me/5547991065218?text='+encodeURIComponent(texto),'_blank','noopener,noreferrer');});</script>
+<script>
+document.getElementById('visita-form').addEventListener('submit',function(e){
+e.preventDefault();
+if(!this.reportValidity())return;
+const nome=document.getElementById('nome').value.trim();
+const cidade=document.getElementById('cidade').value.trim();
+const nota=document.getElementById('nota').value;
+const mensagem=document.getElementById('mensagem').value.trim();
+if(!nome||!nota||!mensagem)return;
+const autorizaFotos=document.getElementById('foto-consentimento').checked;
+const texto=[
+'Olá, Seu Pedro e Dona Vanderleia!',
+'Gostaria de registrar minha visita à Acolhida Beija-Flor e ao Pomar do Peregrino.',
+'',
+'Nome: '+nome,
+'Cidade/estado: '+(cidade||'Não informado'),
+'Avaliação: '+nota+' de 5 estrelas',
+'Mensagem: '+mensagem,
+'',
+'Autorização de texto e avaliação: SIM. Autorizo gratuitamente a publicação do meu nome, cidade (se informada), avaliação e texto no Livro de Visitas, site e redes sociais da Acolhida Beija-Flor, para divulgar as experiências dos visitantes, após aprovação. Posso solicitar a retirada pelo WhatsApp.',
+'Autorização de fotografias e imagem pessoal: '+(autorizaFotos?'SIM, para minha imagem em fotos feitas durante a visita pela equipe da Acolhida e para fotografias que eu enviar com os direitos necessários, exclusivamente no site do Pomar e nas redes sociais oficiais da Acolhida, com possibilidade de solicitar retirada pelo WhatsApp.':'NÃO.')
+].join('\n');
+document.getElementById('envio-aviso').textContent='O WhatsApp será aberto. Confira a mensagem e toque em enviar para concluir.';
+window.open('https://wa.me/5547991065218?text='+encodeURIComponent(texto),'_blank','noopener,noreferrer');
+});
+</script>
 <script>fetch('mensagens-aprovadas.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(items=>{if(!Array.isArray(items)||!items.length)return;const box=document.getElementById('mensagens');box.replaceChildren();items.forEach(item=>{const article=document.createElement('article');article.className='entry';const h=document.createElement('strong');h.textContent=String(item.nome||'Visitante');const meta=document.createElement('div');meta.className='muted';meta.textContent=[item.cidade,item.data].filter(Boolean).join(' • ');const p=document.createElement('p');p.textContent=String(item.mensagem||'');const stars=document.createElement('div');stars.setAttribute('aria-label','Avaliação: '+(Number(item.nota)||0)+' de 5 estrelas');stars.textContent='★'.repeat(Math.max(0,Math.min(5,Number(item.nota)||0)));article.append(h,meta,stars,p);box.append(article)})}).catch(()=>{});</script></body></html>
