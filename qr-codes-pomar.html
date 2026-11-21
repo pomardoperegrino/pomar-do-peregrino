@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#285b38">
+<title>QR Codes do Pomar | Pomar do Peregrino</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f7f0;color:#20442e;font:16px/1.45 system-ui,-apple-system,Arial,sans-serif}
+main{max-width:1050px;margin:auto;padding:24px 16px 45px}h1{margin:8px 0 4px;font-size:clamp(1.7rem,4vw,2.4rem)}p{margin:8px 0 14px}
+a{color:#185638}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #d9aa3b;outline-offset:3px}
+.toolbar{background:white;border:1px solid #d5e5d3;border-radius:14px;padding:18px;margin:20px 0;display:flex;gap:12px;align-items:end;flex-wrap:wrap}
+.toolbar label{display:grid;gap:5px;font-weight:700}.toolbar input,.toolbar select{font:inherit;border:1px solid #91b19a;border-radius:8px;padding:10px;min-height:46px;max-width:100%}
+button,.back{font:inherit;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;background:#185438;color:white;border:0;border-radius:9px;cursor:pointer;text-decoration:none;font-weight:700}
+button:disabled{opacity:.5;cursor:not-allowed}.secondary{background:#e2eee0;color:#20442e}.note{font-size:.93rem;color:#536d58}
+.sheet{background:white;border:1px solid #d5e5d3;border-radius:10px;margin:18px 0;padding:12mm 10mm;box-shadow:0 2px 14px #12341b12}
+.sheet-title{text-align:center;border-bottom:1px solid #d5e5d3;margin-bottom:12px;padding-bottom:8px}
+.sheet-title strong{display:block;font-size:17px}.sheet-title small{color:#516a56}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8mm}
+.tag{border:1px solid #b5cbb5;border-radius:10px;min-width:0;height:55mm;display:grid;grid-template-columns:34mm minmax(0,1fr);align-items:center;gap:4mm;padding:4mm;break-inside:avoid;page-break-inside:avoid}
+.qr{width:31mm;height:31mm;display:flex;align-items:center;justify-content:center}.qr canvas,.qr img{width:31mm!important;height:31mm!important;image-rendering:pixelated}
+.tag strong{display:block;font-size:16px;line-height:1.15;overflow-wrap:anywhere}.tag .code{font-size:14px;font-weight:800;color:#185438;margin-bottom:5px}.tag small{font-size:11px;color:#47634e;display:block;margin-top:6px}.tag .text{min-width:0}
+.status{padding:10px 12px;background:#e2eee0;border-radius:9px}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.tag{height:auto;min-height:50mm}.toolbar{align-items:stretch}.sheet{padding:12px}.sheet-title{font-size:14px}}
+@page{size:A4 portrait;margin:10mm}
+@media print{body{background:white;color:#173b27}main{max-width:none;padding:0}.no-print{display:none!important}.sheet{box-shadow:none;border:0;border-radius:0;margin:0;padding:0;break-after:page;page-break-after:always;width:100%}.sheet:last-child{break-after:auto;page-break-after:auto}.sheet-title{margin-bottom:8mm}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:6mm}.tag{height:55mm;border:1px solid #8aab90;padding:3mm;grid-template-columns:33mm minmax(0,1fr)}.qr,.qr canvas,.qr img{width:30mm!important;height:30mm!important}.tag strong{font-size:13pt}.tag small{font-size:8pt}}
+</style>
+</head>
+<body><main>
+<div class="no-print"><a class="back secondary" href="index.html">← Página inicial</a><h1>🌳 QR Codes do Pomar</h1>
+<p>Etiquetas das árvores do Pomar do Peregrino • Acolhida Beija-Flor.</p>
+<p class="note">Cada QR Code abre diretamente a ficha individual da posição cadastrada. Confira os nomes antes de imprimir e teste um código com a câmera do celular.</p>
+<div class="toolbar">
+<label for="filter">Buscar nome ou código<input id="filter" type="search" placeholder="Ex.: H10 ou araçá"></label>
+<label for="line">Linha<select id="line"><option value="">Todas as linhas</option></select></label>
+<button id="print" disabled>🖨️ Imprimir etiquetas A4</button>
+<button id="reset" class="secondary">Mostrar todas</button>
+</div><p id="status" class="status" role="status" aria-live="polite">Preparando os códigos…</p>
+<p class="note">Formato: 8 etiquetas por folha A4 (2 colunas × 4 linhas). Ao imprimir, selecione papel A4, escala 100% e, preferencialmente, desative cabeçalhos e rodapés do navegador. É necessária conexão com a internet para carregar o gerador de QR Codes.</p>
+</div>
+<div id="pages" aria-label="Etiquetas para impressão"></div>
+</main>
+<script src="dados-plantas.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+'use strict';
+const plants=Array.isArray(window.POMAR_PLANTAS)?window.POMAR_PLANTAS:[];
+const pages=document.getElementById('pages'),status=document.getElementById('status'),print=document.getElementById('print');
+const filter=document.getElementById('filter'),line=document.getElementById('line');
+const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const sorted=plants.slice().sort((a,b)=>a.codigo.localeCompare(b.codigo,'pt-BR',{numeric:true}));
+const base=new URL('ficha-individual.html',location.href);
+for(const letter of [...new Set(sorted.map(p=>p.codigo[0]))]){const o=document.createElement('option');o.value=letter;o.textContent='Linha '+letter;line.append(o)}
+function node(tag,className,text){const el=document.createElement(tag);if(className)el.className=className;if(text!==undefined)el.textContent=text;return el}
+function render(){
+ pages.replaceChildren();print.disabled=true;
+ if(typeof QRCode!=='function'){status.textContent='O gerador de QR Codes não carregou. Verifique a conexão com a internet e atualize a página antes de imprimir.';return}
+ const q=normalize(filter.value.trim());
+ const items=sorted.filter(p=>(!line.value||p.codigo.startsWith(line.value))&&(!q||normalize(p.codigo+' '+p.nome).includes(q)));
+ if(!items.length){status.textContent='Nenhuma planta encontrada. Limpe a busca para ver todas as etiquetas.';return}
+ let generated=0;
+ for(let start=0;start<items.length;start+=8){
+  const group=items.slice(start,start+8),sheet=node('section','sheet'),title=node('div','sheet-title');
+  title.append(node('strong','', 'Pomar do Peregrino • Acolhida Beija-Flor'),node('small','', 'Identificação das árvores • folha '+(Math.floor(start/8)+1)+' de '+Math.ceil(items.length/8)));
+  sheet.append(title);
+  const grid=node('div','grid');
+  for(const p of group){
+   const tag=node('article','tag'),qr=node('div','qr'),info=node('div','text');
+   const url=new URL(base.href);url.searchParams.set('codigo',p.codigo);
+   new QRCode(qr,{text:url.href,width:256,height:256,colorDark:'#111111',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+   info.append(node('div','code','Posição '+p.codigo),node('strong','',p.nome),node('small','','Escaneie para conhecer esta planta'));
+   tag.append(qr,info);grid.append(tag);generated++;
+  }
+  sheet.append(grid);pages.append(sheet);
+ }
+ status.textContent=generated+' etiquetas prontas para impressão em '+Math.ceil(generated/8)+' folha(s) A4.';
+ print.disabled=false;
+}
+filter.addEventListener('input',render);line.addEventListener('change',render);
+document.getElementById('reset').addEventListener('click',()=>{filter.value='';line.value='';render()});
+print.addEventListener('click',()=>{if(!print.disabled)window.print()});
+render();
+})();
+</script>
+</body></html>
