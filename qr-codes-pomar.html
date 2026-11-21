@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f3f7f0;color:#20442e;font:16px/1.45 system-ui,-apple-system,Arial,sans-serif}
 main{max-width:1050px;margin:auto;padding:24px 16px 45px}h1{margin:8px 0 4px;font-size:clamp(1.7rem,4vw,2.4rem)}p{margin:8px 0 14px}
-a{color:#185638}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #d9aa3b;outline-offset:3px}
+a{color:#185638}.plant-link{color:inherit;text-decoration:none}.plant-link:hover{text-decoration:underline}.plant-link:focus-visible{outline:3px solid #d9aa3b;outline-offset:2px}a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #d9aa3b;outline-offset:3px}
 .toolbar{background:white;border:1px solid #d5e5d3;border-radius:14px;padding:18px;margin:20px 0;display:flex;gap:12px;align-items:end;flex-wrap:wrap}
 .toolbar label{display:grid;gap:5px;font-weight:700}.toolbar input,.toolbar select{font:inherit;border:1px solid #91b19a;border-radius:8px;padding:10px;min-height:46px;max-width:100%}
 button,.back{font:inherit;display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 16px;background:#185438;color:white;border:0;border-radius:9px;cursor:pointer;text-decoration:none;font-weight:700}
@@ -28,7 +28,7 @@ button:disabled{opacity:.5;cursor:not-allowed}.secondary{background:#e2eee0;colo
 <body><main>
 <div class="no-print"><a class="back secondary" href="index.html">← Página inicial</a><h1>🌳 QR Codes do Pomar</h1>
 <p>Etiquetas das árvores do Pomar do Peregrino • Acolhida Beija-Flor.</p>
-<p class="note">Cada QR Code abre diretamente a ficha individual da posição cadastrada. Confira os nomes antes de imprimir e teste um código com a câmera do celular.</p>
+<p class="note">Cada QR Code abre diretamente a ficha individual da posição cadastrada. Confira os nomes antes de imprimir. Clique no nome de qualquer planta para testar sua ficha em uma nova aba, ou escaneie o QR Code com o celular.</p>
 <div class="toolbar">
 <label for="filter">Buscar nome ou código<input id="filter" type="search" placeholder="Ex.: H10 ou araçá"></label>
 <label for="line">Linha<select id="line"><option value="">Todas as linhas</option></select></label>
@@ -68,7 +68,7 @@ function render(){
    const tag=node('article','tag'),qr=node('div','qr'),info=node('div','text');
    const url=new URL(base.href);url.searchParams.set('codigo',p.codigo);
    new QRCode(qr,{text:url.href,width:256,height:256,colorDark:'#111111',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
-   info.append(node('div','code','Posição '+p.codigo),node('strong','',p.nome),node('small','','Escaneie para conhecer esta planta'));
+   const title=node('strong','');const link=node('a','plant-link',p.nome);link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.title='Conferir ficha da planta '+p.codigo+' em nova aba';title.append(link);info.append(node('div','code','Posição '+p.codigo),title,node('small','','Escaneie para conhecer esta planta'));
    tag.append(qr,info);grid.append(tag);generated++;
   }
   sheet.append(grid);pages.append(sheet);
