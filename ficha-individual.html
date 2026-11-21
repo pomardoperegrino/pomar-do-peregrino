@@ -366,8 +366,8 @@ async function findCommonsPhoto(name){
 }
 function loadCommonsReference(name){
  const panel=document.getElementById("photo-panel"),img=document.getElementById("photo-img"),caption=document.getElementById("photo-caption"),status=document.getElementById("photo-status");
- if(/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro|ameixinha amarela|cortiça crespa|cortiça lisa|guabiroba crespa|guabiroba-do-campo|guaçatonga|amora portuguesa|fisális|ingá-.+|araçá-.+|mirtilo|jabuticaba)$/i.test(name)){
-  status.textContent="Fotografia não publicada automaticamente: é preciso conferir a identificação botânica para evitar mostrar frutos de outra espécie.";
+ if(/^(falta identificar|campari|cipó-rabo-de-macaco|baga de macaco|cravo louro|ameixinha amarela|cortiça crespa|cortiça lisa|guabiroba crespa|guabiroba-do-campo|guaçatonga|amora portuguesa|fisális|ingá-.+|araçá-.+|mirtilo|jabuticaba|goiaba[- ](?:branca|vermelha))$/i.test(name)){
+  status.textContent=/^goiaba[- ](?:branca|vermelha)$/i.test(name)?"Fotografia em conferência: vamos selecionar uma imagem licenciada de fruto aberto que mostre corretamente a cor da polpa desta variedade.":"Fotografia não publicada automaticamente: é preciso conferir a identificação botânica para evitar mostrar frutos de outra espécie.";
   return;
  }
  status.textContent="Procurando fotografia real com licença de uso…";
